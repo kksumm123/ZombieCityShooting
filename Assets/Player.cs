@@ -8,10 +8,7 @@ public class Player : MonoBehaviour
     GameObject bullet;
     Transform bulletSpawnPosition;
     const string bulletString = "Bullet";
-
-
     [SerializeField] float speed = 5;
-    float lookatRotationValue = 0.05f;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -26,13 +23,12 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             State = StateType.Shoot;
-            Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             Instantiate(bullet, bulletSpawnPosition.position, transform.rotation);
         }
     }
-
-    Vector3 move;
+    public Vector3 myF;
+    public Vector3 move;
     void Move()
     {
         Vector3 move = Vector3.zero;
@@ -44,13 +40,26 @@ public class Player : MonoBehaviour
         if (move != Vector3.zero)
         {
             move.Normalize();
+
             transform.Translate(speed * Time.deltaTime * move, Space.World);
-            transform.forward = Vector3.Slerp(transform.forward, move, lookatRotationValue);
+            RotationSlerp(move);
+
             State = StateType.Run;
         }
         else
             State = StateType.Idle;
     }
+
+    float fastAimingDistance = 0.2f;
+    float lookatRotationValue = 0.05f;
+    void RotationSlerp(Vector3 move)
+    {
+        if (Vector3.Distance(transform.forward, move) < fastAimingDistance)
+            transform.forward = Vector3.Slerp(transform.forward, move, lookatRotationValue * 10);
+        else
+            transform.forward = Vector3.Slerp(transform.forward, move, lookatRotationValue);
+    }
+
     [SerializeField] StateType m_state;
 
     StateType State
