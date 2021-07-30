@@ -45,10 +45,11 @@ public class Player : MonoBehaviour
             State = StateType.Idle;
     }
 
-    float recoilX = 0.05f;
-    float recoilY = 0.05f;
+    float recoilX = 1.5f;
+    float recoilY = 1.5f;
     Vector3 recoil;
     float shootDelayEndTime;
+    Quaternion bulletRotation;
     void Shoot()
     {
         if (Input.GetMouseButton(0))
@@ -59,7 +60,8 @@ public class Player : MonoBehaviour
                 StartCoroutine(ShootCo());
                 State = StateType.Shoot;
                 recoil = new Vector3(Random.Range(-recoilX, recoilX), Random.Range(-recoilY, recoilY), 0);
-                Instantiate(bullet, bulletSpawnPosition.position + recoil, transform.rotation);
+                bulletRotation = Quaternion.Euler(transform.rotation.eulerAngles + recoil);
+                Instantiate(bullet, bulletSpawnPosition.position, bulletRotation);
             }
         }
     }
