@@ -8,12 +8,17 @@ public class Player : MonoBehaviour
     GameObject bullet;
     Transform bulletSpawnPosition;
     const string bulletString = "Bullet";
+    RectTransform recoilDetail;
+    Vector2 recoilDetailOriginSize;
+
     [SerializeField] float speed = 5;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         bullet = (GameObject)Resources.Load(bulletString);
         bulletSpawnPosition = transform.Find("BulletSpawnPosition");
+        recoilDetail = GameObject.Find("Canvas").transform.Find("RecoilUI/RecoilDetail").GetComponent<RectTransform>();
+        recoilDetailOriginSize = recoilDetail.sizeDelta;
     }
 
 
@@ -45,9 +50,7 @@ public class Player : MonoBehaviour
             State = StateType.Idle;
     }
 
-    float recoilX = 1.5f;
-    float recoilY = 1.5f;
-    Vector3 recoil;
+
     float shootDelayEndTime;
     Quaternion bulletRotation;
     void Shoot()
@@ -59,11 +62,35 @@ public class Player : MonoBehaviour
                 shootDelayEndTime = Time.time + shootDelay;
                 StartCoroutine(ShootCo());
                 State = StateType.Shoot;
-                recoil = new Vector3(Random.Range(-recoilX, recoilX), Random.Range(-recoilY, recoilY), 0);
-                bulletRotation = Quaternion.Euler(transform.rotation.eulerAngles + recoil);
-                Instantiate(bullet, bulletSpawnPosition.position, bulletRotation);
+                IncreaseRecoil();
+                Instantiate(bullet, bulletSpawnPosition.position, CalculateRecoil(transform.rotation));
             }
         }
+        else
+            DecreaseRecoil();
+    }
+
+
+
+    float recoilValue = 0f;
+    float recoilMaxValue = 1.5f;
+    float recoilLerpValue = 0.1f;
+    void IncreaseRecoil()
+    {
+        recoilValue = Mathf.Lerp(recoilValue, recoilMaxValue, recoilLerpValue);
+        recoilDetail.sizeDelta = recoilDetailOriginSize + (recoilDetailOriginSize * recoilValue);
+    }
+    void DecreaseRecoil()
+    {
+        recoilValue = Mathf.Lerp(recoilValue, 0, recoilLerpValue);
+        recoilDetail.sizeDelta = recoilDetailOriginSize + (recoilDetailOriginSize * recoilValue);
+    }
+
+    Vector3 recoil;
+    Quaternion CalculateRecoil(Quaternion rotation)
+    {
+        recoil = new Vector3(Random.Range(-recoilValue, recoilValue), Random.Range(-recoilValue, recoilValue), 0);
+        return Quaternion.Euler(rotation.eulerAngles + recoil);
     }
 
     [SerializeField] float shootDelay = 0.05f;
