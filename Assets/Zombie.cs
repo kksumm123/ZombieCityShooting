@@ -8,19 +8,21 @@ public class Zombie : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
     public Transform target;
-    void Start()
+
+    [SerializeField] int hp = 100;
+    IEnumerator Start()
     {
         animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
         target = FindObjectOfType<Player>().transform;
-    }
-    void Update()
-    {
-        if (target)
+
+        while (hp > 0)
         {
-            agent.SetDestination(target.position);
+            if (target)
+                agent.destination = target.position;
             animator.Play("Run");
+            yield return new WaitForSeconds(Random.Range(0.5f, 2f));
         }
     }
 }

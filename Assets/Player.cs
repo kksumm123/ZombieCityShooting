@@ -17,7 +17,9 @@ public class Player : MonoBehaviour
         Move();
 
         if (Input.GetMouseButton(0))
+        {
             State = StateType.Shoot;
+        }
     }
 
     Vector3 move;
