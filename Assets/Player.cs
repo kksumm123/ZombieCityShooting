@@ -16,19 +16,14 @@ public class Player : MonoBehaviour
         bulletSpawnPosition = transform.Find("BulletSpawnPosition");
     }
 
+
     void Update()
     {
         Move();
-
-        if (Input.GetMouseButton(0))
-        {
-            State = StateType.Shoot;
-
-            Instantiate(bullet, bulletSpawnPosition.position, transform.rotation);
-        }
+        Shoot();
     }
-    public Vector3 myF;
-    public Vector3 move;
+
+    Vector3 move;
     void Move()
     {
         Vector3 move = Vector3.zero;
@@ -48,6 +43,32 @@ public class Player : MonoBehaviour
         }
         else
             State = StateType.Idle;
+    }
+
+    float recoilX = 0.05f;
+    float recoilY = 0.05f;
+    Vector3 recoil;
+    float shootDelayEndTime;
+    void Shoot()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            if (shootDelayEndTime < Time.time)
+            {
+                shootDelayEndTime = Time.time + shootDelay;
+                StartCoroutine(ShootCo());
+                State = StateType.Shoot;
+                recoil = new Vector3(Random.Range(-recoilX, recoilX), Random.Range(-recoilY, recoilY), 0);
+                Instantiate(bullet, bulletSpawnPosition.position + recoil, transform.rotation);
+            }
+        }
+    }
+
+    [SerializeField] float shootDelay = 0.05f;
+    IEnumerator ShootCo()
+    {
+        while (Time.time < shootDelayEndTime)
+            yield return null;
     }
 
     float fastAimingDistance = 0.2f;

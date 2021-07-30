@@ -76,9 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb745de572e2b54d88b5beddcc4ffce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
-  bulletSpawnPosition: {fileID: 0}
   speed: 5
+  shootDelay: 0.05
   m_state: 0
 --- !u!195 &415332575
 NavMeshAgent:
