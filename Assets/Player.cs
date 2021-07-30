@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Animator animator;
+    public GameObject bullet;
+    public Transform bulletSpawnPosition;
+
     [SerializeField] float speed = 5;
     float lookatRotationValue = 0.05f;
     void Start()
@@ -19,6 +22,9 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             State = StateType.Shoot;
+            Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            Instantiate(bullet, transform.position, transform.rotation);
         }
     }
 

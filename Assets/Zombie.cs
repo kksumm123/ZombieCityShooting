@@ -25,4 +25,21 @@ public class Zombie : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0.5f, 2f));
         }
     }
+
+    public void TakeHit(int damage)
+    {
+        hp -= damage;
+        animator.Play("TakeHit");
+        if(hp <= 0)
+        {
+            GetComponent<Collider>().enabled = false;
+            Invoke(nameof(Die), 1);
+        }
+    }
+
+    void Die()
+    {
+        animator.Play("Die");
+        Destroy(gameObject, 1);
+    }
 }
