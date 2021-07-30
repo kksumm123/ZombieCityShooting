@@ -5,14 +5,18 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Animator animator;
-    public GameObject bullet;
-    public Transform bulletSpawnPosition;
+    GameObject bullet;
+    Transform bulletSpawnPosition;
+    const string bulletString = "Bullet";
+
 
     [SerializeField] float speed = 5;
     float lookatRotationValue = 0.05f;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
+        bullet = (GameObject)Resources.Load(bulletString);
+        bulletSpawnPosition = transform.Find("BulletSpawnPosition");
     }
 
     void Update()
@@ -24,7 +28,7 @@ public class Player : MonoBehaviour
             State = StateType.Shoot;
             Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            Instantiate(bullet, transform.position, transform.rotation);
+            Instantiate(bullet, bulletSpawnPosition.position, transform.rotation);
         }
     }
 

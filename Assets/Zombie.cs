@@ -7,7 +7,7 @@ public class Zombie : MonoBehaviour
 {
     Animator animator;
     NavMeshAgent agent;
-    public Transform target;
+    Transform target;
 
     [SerializeField] int hp = 100;
     IEnumerator Start()
