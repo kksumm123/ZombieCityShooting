@@ -5,14 +5,22 @@ using UnityEngine.AI;
 
 public class Zombie : MonoBehaviour
 {
+    Animator animator;
     NavMeshAgent agent;
     public Transform target;
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         agent = GetComponent<NavMeshAgent>();
+
+        target = FindObjectOfType<Player>().transform;
     }
     void Update()
     {
-        agent.SetDestination(target.position);
+        if (target)
+        {
+            agent.SetDestination(target.position);
+            animator.Play("Run");
+        }
     }
 }
