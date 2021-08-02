@@ -13,7 +13,6 @@ public partial class Player : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         bullet = (GameObject)Resources.Load(bulletString);
-        bulletSpawnPosition = transform.Find("BulletSpawnPosition");
         recoilDetail = GameObject.Find("Canvas").transform.Find("RecoilUI/RecoilDetail").GetComponent<RectTransform>();
         recoilDetailOriginSize = recoilDetail.sizeDelta;
     }

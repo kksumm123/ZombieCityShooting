@@ -6,7 +6,7 @@ public partial class Player : MonoBehaviour
 {
     const string bulletString = "Bullet";
     GameObject bullet;
-    Transform bulletSpawnPosition;
+    public Transform bulletSpawnPosition;
 
 
     float shootDelayEndTime;
@@ -34,9 +34,9 @@ public partial class Player : MonoBehaviour
     public float bulletFlashTime = 0.001f;
     private IEnumerator FlashBulletCo()
     {
-        bulletLight.SetActive(true);
+        //bulletLight.SetActive(true);
         yield return new WaitForSeconds(bulletFlashTime);
-        bulletLight.SetActive(false);
+        //bulletLight.SetActive(false);
     }
 
     float recoilValue = 0f;
