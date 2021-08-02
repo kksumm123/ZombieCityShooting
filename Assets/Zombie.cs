@@ -27,13 +27,14 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    public void TakeHit(int damage)
+    public void TakeHit(int damage, Vector3 toKnockBackDirection)
     {
         hp -= damage;
         animator.Play($"TakeHit{Random.Range(1, 3)}");
         // 피격 이펙트 생성(피)
 
         // 뒤로 밀려나게
+        KnockBackMove(toKnockBackDirection);
 
         // 이동 스피드를 잠시 0으로
         agent.speed = 0;
@@ -45,6 +46,12 @@ public class Zombie : MonoBehaviour
             GetComponent<Collider>().enabled = false;
             Invoke(nameof(Die), 1);
         }
+    }
+
+    [SerializeField] float knockBackDistance = 0.1f;
+    void KnockBackMove(Vector3 toKnockBackDirection)
+    {
+        transform.Translate(toKnockBackDirection * knockBackDistance, Space.World);
     }
 
     float TakeHitStopTime = 0.1f;

@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Zombie"))
         {
             var zombie = other.GetComponent<Zombie>();
-            zombie.TakeHit(power);
+            zombie.TakeHit(power, transform.forward);
             Destroy(gameObject);
         }
     }
