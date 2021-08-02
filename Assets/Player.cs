@@ -81,13 +81,16 @@ public class Player : MonoBehaviour
                 shootDelayEndTime = Time.time + shootDelay;
                 StartCoroutine(ShootCo());
                 State = StateType.Shoot;
-                animator.Play("Shoot");
+                animator.SetBool("Fire", true);
                 IncreaseRecoil();
                 Instantiate(bullet, bulletSpawnPosition.position, CalculateRecoil(transform.rotation));
             }
         }
         else
+        {
+            animator.SetBool("Fire", false);
             DecreaseRecoil();
+        }
     }
 
 
