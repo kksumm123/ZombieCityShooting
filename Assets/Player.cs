@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public partial class Player : MonoBehaviour
 {
     Animator animator;
-    GameObject bullet;
-    Transform bulletSpawnPosition;
-    const string bulletString = "Bullet";
     RectTransform recoilDetail;
     Vector2 recoilDetailOriginSize;
 
@@ -68,61 +65,6 @@ public class Player : MonoBehaviour
         animator.SetFloat("Speed", move.sqrMagnitude);
     }
     #endregion Move
-
-    #region Fire
-    float shootDelayEndTime;
-    Quaternion bulletRotation;
-    void Fire()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            if (shootDelayEndTime < Time.time)
-            {
-                shootDelayEndTime = Time.time + shootDelay;
-                StartCoroutine(ShootCo());
-                State = StateType.Shoot;
-                animator.SetBool("Fire", true);
-                IncreaseRecoil();
-                Instantiate(bullet, bulletSpawnPosition.position, CalculateRecoil(transform.rotation));
-            }
-        }
-        else
-        {
-            animator.SetBool("Fire", false);
-            DecreaseRecoil();
-        }
-    }
-
-
-
-    float recoilValue = 0f;
-    float recoilMaxValue = 1.5f;
-    float recoilLerpValue = 0.1f;
-    void IncreaseRecoil()
-    {
-        recoilValue = Mathf.Lerp(recoilValue, recoilMaxValue, recoilLerpValue);
-        recoilDetail.sizeDelta = recoilDetailOriginSize + (recoilDetailOriginSize * recoilValue);
-    }
-    void DecreaseRecoil()
-    {
-        recoilValue = Mathf.Lerp(recoilValue, 0, recoilLerpValue);
-        recoilDetail.sizeDelta = recoilDetailOriginSize + (recoilDetailOriginSize * recoilValue);
-    }
-
-    Vector3 recoil;
-    Quaternion CalculateRecoil(Quaternion rotation)
-    {
-        recoil = new Vector3(Random.Range(-recoilValue, recoilValue), Random.Range(-recoilValue, recoilValue), 0);
-        return Quaternion.Euler(rotation.eulerAngles + recoil);
-    }
-
-    [SerializeField] float shootDelay = 0.05f;
-    IEnumerator ShootCo()
-    {
-        while (Time.time < shootDelayEndTime)
-            yield return null;
-    }
-    #endregion Fire
 
     #region Methods
     float fastAimingDistance = 0.2f;
