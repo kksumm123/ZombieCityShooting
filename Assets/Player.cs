@@ -5,16 +5,12 @@ using UnityEngine;
 public partial class Player : MonoBehaviour
 {
     Animator animator;
-    RectTransform recoilDetail;
-    Vector2 recoilDetailOriginSize;
 
     [SerializeField] float speed = 5;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         bullet = (GameObject)Resources.Load(bulletString);
-        recoilDetail = GameObject.Find("Canvas").transform.Find("RecoilUI/RecoilDetail").GetComponent<RectTransform>();
-        recoilDetailOriginSize = recoilDetail.sizeDelta;
         bulletLight = GetComponentInChildren<Light>(true).gameObject;
     }
 
