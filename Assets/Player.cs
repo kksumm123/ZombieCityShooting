@@ -29,9 +29,18 @@ public class Player : MonoBehaviour
         Fire();
     }
 
+    Plane plane = new Plane(new Vector3(0, 1, 0), 0);
     void LookAtMouse()
     {
-
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (plane.Raycast(ray, out float enter))
+        {
+            Vector3 hitPoint = ray.GetPoint(enter);
+            Vector3 dir = hitPoint - transform.position;
+            dir.y = transform.position.y;
+            dir.Normalize();
+            RotationSlerp(dir);
+        }
     }
     #region Move
     Vector3 move;
