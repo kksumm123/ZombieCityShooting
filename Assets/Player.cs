@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
-        Shoot();
+        Fire();
     }
     #region Move
     Vector3 move;
@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
             move.Normalize();
 
             transform.Translate(speed * Time.deltaTime * move, Space.World);
-            //RotationSlerp(move);
 
             State = StateType.Run;
         }
@@ -55,10 +54,10 @@ public class Player : MonoBehaviour
     }
     #endregion Move
 
-    #region Shoot
+    #region Fire
     float shootDelayEndTime;
     Quaternion bulletRotation;
-    void Shoot()
+    void Fire()
     {
         if (Input.GetMouseButton(0))
         {
@@ -105,7 +104,7 @@ public class Player : MonoBehaviour
         while (Time.time < shootDelayEndTime)
             yield return null;
     }
-    #endregion Shoot
+    #endregion Fire
 
     #region Methods
     float fastAimingDistance = 0.2f;
