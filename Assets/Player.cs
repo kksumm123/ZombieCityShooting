@@ -24,8 +24,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        LookAtMouse();
         Move();
         Fire();
+    }
+
+    void LookAtMouse()
+    {
+
     }
     #region Move
     Vector3 move;
@@ -109,15 +115,16 @@ public class Player : MonoBehaviour
     #region Methods
     float fastAimingDistance = 0.2f;
     float lookatRotationValue = 0.05f;
-    void RotationSlerp(Vector3 move)
+    void RotationSlerp(Vector3 dir)
     {
-        if (Vector3.Distance(transform.forward, move) < fastAimingDistance)
-            transform.forward = Vector3.Slerp(transform.forward, move, lookatRotationValue * 10);
+        if (Vector3.Distance(transform.forward, dir) < fastAimingDistance)
+            transform.forward = Vector3.Slerp(transform.forward, dir, lookatRotationValue * 10);
         else
-            transform.forward = Vector3.Slerp(transform.forward, move, lookatRotationValue);
+            transform.forward = Vector3.Slerp(transform.forward, dir, lookatRotationValue);
     }
     #endregion Methods
 
+    #region State
     [SerializeField] StateType m_state;
 
     StateType State
@@ -141,4 +148,5 @@ public class Player : MonoBehaviour
         Hit,
         Death,
     }
+    #endregion State
 }
