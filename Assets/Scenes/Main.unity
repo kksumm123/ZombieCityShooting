@@ -8685,10 +8685,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: bullet
       objectReference: {fileID: 0}
-    - target: {fileID: 3177356632863467888, guid: eee5a96b8493ddb4e8d13fffa8f4ce00, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3177356632863467892, guid: eee5a96b8493ddb4e8d13fffa8f4ce00, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -8703,7 +8699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3177356632863467892, guid: eee5a96b8493ddb4e8d13fffa8f4ce00, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.01
+      value: 9.847
       objectReference: {fileID: 0}
     - target: {fileID: 3177356632863467892, guid: eee5a96b8493ddb4e8d13fffa8f4ce00, type: 3}
       propertyPath: m_LocalRotation.w
