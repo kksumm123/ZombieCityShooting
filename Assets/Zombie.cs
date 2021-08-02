@@ -17,24 +17,26 @@ public class Zombie : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         originSpeed = agent.speed;
         target = FindObjectOfType<Player>().transform;
+        bloodParticle = (GameObject)Resources.Load("BloodParticle");
 
         while (hp > 0)
         {
             if (target)
                 agent.destination = target.position;
-            animator.Play("Run");
             yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+            // 여기서 걸려서 idle이 되는거같아요 
         }
     }
 
-    public void TakeHit(int damage, Vector3 toKnockBackDirection)
+    public void TakeHit(int damage, Transform bulletTr)
     {
         hp -= damage;
         animator.Play($"TakeHit{Random.Range(1, 3)}");
         // 피격 이펙트 생성(피)
+        CreateBloodEffect(bulletTr);
 
         // 뒤로 밀려나게
-        KnockBackMove(toKnockBackDirection);
+        KnockBackMove(bulletTr.forward);
 
         // 이동 스피드를 잠시 0으로
         agent.speed = 0;
@@ -46,6 +48,12 @@ public class Zombie : MonoBehaviour
             GetComponent<Collider>().enabled = false;
             Invoke(nameof(Die), 1);
         }
+    }
+
+    GameObject bloodParticle;
+    void CreateBloodEffect(Transform bulletTr)
+    {
+        Instantiate(bloodParticle, bulletTr.position, Quaternion.identity);
     }
 
     [SerializeField] float knockBackNoise = 0.1f;
