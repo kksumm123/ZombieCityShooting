@@ -29,8 +29,8 @@ public class Zombie : MonoBehaviour
     public void TakeHit(int damage)
     {
         hp -= damage;
-        animator.Play("TakeHit");
-        if(hp <= 0)
+        animator.Play($"TakeHit{Random.Range(1, 3)}");
+        if (hp <= 0)
         {
             GetComponent<Collider>().enabled = false;
             Invoke(nameof(Die), 1);
