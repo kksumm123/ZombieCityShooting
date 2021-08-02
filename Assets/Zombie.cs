@@ -51,6 +51,8 @@ public class Zombie : MonoBehaviour
     [SerializeField] float knockBackDistance = 0.1f;
     void KnockBackMove(Vector3 toKnockBackDirection)
     {
+        toKnockBackDirection.y = 0;
+        toKnockBackDirection.Normalize();
         transform.Translate(toKnockBackDirection * knockBackDistance, Space.World);
     }
 
