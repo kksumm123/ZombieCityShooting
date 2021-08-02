@@ -16,11 +16,10 @@ public partial class Player : MonoBehaviour
         {
             if (shootDelayEndTime < Time.time)
             {
-                StartCoroutine(FlashBulletCo());
                 animator.SetBool("Fire", true);
                 shootDelayEndTime = Time.time + shootDelay;
                 IncreaseRecoil();
-                Instantiate(bullet, bulletSpawnPosition.position, CalculateRecoil(transform.rotation));
+                StartCoroutine(InstantiateBilletAndFlashBulletCo());
             }
         }
         else
@@ -32,11 +31,14 @@ public partial class Player : MonoBehaviour
 
     GameObject bulletLight;
     public float bulletFlashTime = 0.001f;
-    private IEnumerator FlashBulletCo()
+    private IEnumerator InstantiateBilletAndFlashBulletCo()
     {
-        //bulletLight.SetActive(true);
+        yield return null;
+        Instantiate(bullet, bulletSpawnPosition.position, CalculateRecoil(transform.rotation));
+
+        bulletLight.SetActive(true);
         yield return new WaitForSeconds(bulletFlashTime);
-        //bulletLight.SetActive(false);
+        bulletLight.SetActive(false);
     }
 
     float recoilValue = 0f;

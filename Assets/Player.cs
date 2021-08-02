@@ -15,6 +15,7 @@ public partial class Player : MonoBehaviour
         bullet = (GameObject)Resources.Load(bulletString);
         recoilDetail = GameObject.Find("Canvas").transform.Find("RecoilUI/RecoilDetail").GetComponent<RectTransform>();
         recoilDetailOriginSize = recoilDetail.sizeDelta;
+        bulletLight = GetComponentInChildren<Light>(true).gameObject;
     }
 
 
