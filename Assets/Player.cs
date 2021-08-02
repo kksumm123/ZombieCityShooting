@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         Move();
         Shoot();
     }
-
+    #region Move
     Vector3 move;
     void Move()
     {
@@ -42,15 +42,20 @@ public class Player : MonoBehaviour
             move.Normalize();
 
             transform.Translate(speed * Time.deltaTime * move, Space.World);
-            RotationSlerp(move);
+            //RotationSlerp(move);
 
             State = StateType.Run;
         }
         else
             State = StateType.Idle;
+
+        animator.SetFloat("DirX", move.x);
+        animator.SetFloat("DirY", move.z);
+        animator.SetFloat("Speed", move.sqrMagnitude);
     }
+    #endregion Move
 
-
+    #region Shoot
     float shootDelayEndTime;
     Quaternion bulletRotation;
     void Shoot()
@@ -62,6 +67,7 @@ public class Player : MonoBehaviour
                 shootDelayEndTime = Time.time + shootDelay;
                 StartCoroutine(ShootCo());
                 State = StateType.Shoot;
+                animator.Play("Shoot");
                 IncreaseRecoil();
                 Instantiate(bullet, bulletSpawnPosition.position, CalculateRecoil(transform.rotation));
             }
@@ -99,7 +105,9 @@ public class Player : MonoBehaviour
         while (Time.time < shootDelayEndTime)
             yield return null;
     }
+    #endregion Shoot
 
+    #region Methods
     float fastAimingDistance = 0.2f;
     float lookatRotationValue = 0.05f;
     void RotationSlerp(Vector3 move)
@@ -109,6 +117,7 @@ public class Player : MonoBehaviour
         else
             transform.forward = Vector3.Slerp(transform.forward, move, lookatRotationValue);
     }
+    #endregion Methods
 
     [SerializeField] StateType m_state;
 
@@ -122,7 +131,6 @@ public class Player : MonoBehaviour
 
             print($"{m_state} -> {value}");
             m_state = value;
-            animator.Play(m_state.ToString());
         }
     }
 
