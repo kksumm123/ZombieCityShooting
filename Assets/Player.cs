@@ -47,10 +47,16 @@ public partial class Player : MonoBehaviour
 
         if (move != Vector3.zero)
         {
+            Vector3 relateMove = Vector3.zero;
+            // forward * move.z 할당
+            relateMove = Camera.main.transform.forward * move.z;
+            // right * move.x 할당 (+= 해주는 이유는 forward 된 값에 더해주기 위함)
+            relateMove += Camera.main.transform.right * move.x;
+            relateMove.y = 0;
+            move = relateMove;
+
             move.Normalize();
-
             transform.Translate(speed * Time.deltaTime * move, Space.World);
-
             State = StateType.Run;
         }
         else
