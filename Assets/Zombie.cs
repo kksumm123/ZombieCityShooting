@@ -80,6 +80,8 @@ public class Zombie : MonoBehaviour
     {
         if (hp > 0)
         {
+            StopCoroutine(fsmHandle);
+
             hp -= damage;
             // 뒤로 밀려나게
             KnockBackMove(bulletTr.forward);
