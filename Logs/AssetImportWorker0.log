@@ -15,11 +15,11 @@ C:/UnityProject/Study/ZombieCityShooting
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-10364
+8835
 Successfully changed project path to: C:/UnityProject/Study/ZombieCityShooting
 C:/UnityProject/Study/ZombieCityShooting
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 12.50 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 14.55 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.13f1 (71691879b7f5)
 [Subsystems] Discovering subsystems at path E:/Unity/2020.3.13f1/Editor/Data/Resources/UnitySubsystems
@@ -35,37 +35,37 @@ Initialize mono
 Mono path[0] = 'E:/Unity/2020.3.13f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/2020.3.13f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'E:/Unity/2020.3.13f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56420
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56632
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Unity/2020.3.13f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.000708 seconds.
+Registered in 0.000757 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 13.24 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 16.28 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.311 seconds
+- Completed reload, in  1.397 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.000467 seconds.
+Registered in 0.000411 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.13 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.18 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.517 seconds
+- Completed reload, in  0.551 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 0.13 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.17 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 646 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 46.8 MB.
-System memory in use after: 46.8 MB.
+Unloading 867 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 54.6 MB.
+System memory in use after: 54.6 MB.
 
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1088.
-Total: 1.633100 ms (FindLiveObjects: 0.068600 ms CreateObjectMapping: 0.016800 ms MarkObjects: 1.451100 ms  DeleteObjects: 0.095900 ms)
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 1311.
+Total: 1.409700 ms (FindLiveObjects: 0.105100 ms CreateObjectMapping: 0.020300 ms MarkObjects: 1.209000 ms  DeleteObjects: 0.074700 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -79,96 +79,78 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f77567db2338f23cdec6796093bd25e') in 0.028470 seconds 
-  Import took 0.029736 seconds .
+  path: Assets/ToonyTinyPeople/TT_soldiers_Demo/Demo_sample_scene/animation_samples/weapon_idle.controller
+  artifactKey: Guid(94d76f859419a5048a2d6cf80ef45f88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ToonyTinyPeople/TT_soldiers_Demo/Demo_sample_scene/animation_samples/weapon_idle.controller using Guid(94d76f859419a5048a2d6cf80ef45f88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '815ebc73ba85c47f4fc17e00514c236e') in 0.061612 seconds 
+  Import took 0.063232 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 8.070248 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d9056f3621d8cc9510b70515a066ca6') in 0.002022 seconds 
-  Import took 0.003169 seconds .
+  Time since last request: 90.851489 seconds.
+  path: Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx
+  artifactKey: Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx using Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c1bbe9a68edfe94bb98b54a3d8b867d') in 0.148714 seconds 
+  Import took 0.150287 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 82.231951 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e594f5aab1f8d4129a15431a7e32b9f7') in 0.001705 seconds 
-  Import took 0.002830 seconds .
+  Time since last request: 9.171122 seconds.
+  path: Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx
+  artifactKey: Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx using Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c439be14399e597829c50de0e9bbadc') in 0.039084 seconds 
+  Import took 0.040747 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.005797 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e594f5aab1f8d4129a15431a7e32b9f7') in 0.001469 seconds 
-  Import took 0.002225 seconds .
+  Time since last request: 18.427936 seconds.
+  path: Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx
+  artifactKey: Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx using Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2044abe5bc60b2a3af4e80e076097f6e') in 0.023092 seconds 
+  Import took 0.025538 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 42.836724 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9baf020772d4a3a22817236a3a13b1cc') in 0.001569 seconds 
-  Import took 0.002513 seconds .
+  Time since last request: 0.000553 seconds.
+  path: Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx
+  artifactKey: Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/xbot@Stand To Roll.fbx using Guid(9d930ee20b03cf044a7f633ede551b9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2044abe5bc60b2a3af4e80e076097f6e') in 0.024029 seconds 
+  Import took 0.025514 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.002724 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9baf020772d4a3a22817236a3a13b1cc') in 0.001460 seconds 
-  Import took 0.002410 seconds .
+  Time since last request: 480.405768 seconds.
+  path: Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/Stand To Roll.anim
+  artifactKey: Guid(dc625f9bde0bc5f43bc242f7fd7f3371) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ToonyTinyPeople/TT_soldiers_Demo/animation/Stand To Roll.anim using Guid(dc625f9bde0bc5f43bc242f7fd7f3371) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '67a6e89470c24c8316a4c98f445ee1ec') in 0.016522 seconds 
+  Import took 0.018002 seconds .
 
 ========================================================================
-Received Import Request.
-  Time since last request: 11.181751 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21b2ec9f99dae837609cc677028f8132') in 0.001540 seconds 
-  Import took 0.002591 seconds .
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.000392 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.16 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.501 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.16 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 860 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 71.5 MB.
+System memory in use after: 71.6 MB.
 
-========================================================================
-Received Import Request.
-  Time since last request: 7.837592 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9deb0149b6723ce0b8610deb2a942763') in 0.001507 seconds 
-  Import took 0.002584 seconds .
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 1357.
+Total: 1.240900 ms (FindLiveObjects: 0.104400 ms CreateObjectMapping: 0.019500 ms MarkObjects: 1.075800 ms  DeleteObjects: 0.040400 ms)
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.002400 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9deb0149b6723ce0b8610deb2a942763') in 0.001702 seconds 
-  Import took 0.002865 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 56.927667 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72bf98254dcf3b0c47c28c2755592082') in 0.001604 seconds 
-  Import took 0.002685 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 12.785175 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a61e3270a92c8eb1549043baf40600bf') in 0.001533 seconds 
-  Import took 0.002561 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.002062 seconds.
-  path: Assets/Player_Fire.cs
-  artifactKey: Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Player_Fire.cs using Guid(7ae15e228e36e944093fa1ecb1fb55b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a61e3270a92c8eb1549043baf40600bf') in 0.001820 seconds 
-  Import took 0.002759 seconds .
-
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

@@ -20,6 +20,7 @@ public partial class Player : MonoBehaviour
         LookAtMouse();
         Move();
         Fire();
+
     }
 
     Plane plane = new Plane(new Vector3(0, 1, 0), 0);
@@ -67,6 +68,13 @@ public partial class Player : MonoBehaviour
         animator.SetFloat("Speed", move.sqrMagnitude);
     }
     #endregion Move
+
+    #region Roll
+    void Roll()
+    {
+
+    }
+    #endregion Roll
 
     #region Methods
     float fastAimingDistance = 0.2f;
