@@ -7,6 +7,7 @@ public partial class Player : MonoBehaviour
 {
     Animator animator;
 
+    [SerializeField] int hp = 300;
     [SerializeField] float speed = 5;
     [SerializeField] float shootingSpeed = 2.5f;
     void Start()
@@ -114,6 +115,17 @@ public partial class Player : MonoBehaviour
         // 총알금지, 움직이는거 금지, 마우스 바라보는거 금지.
     }
     #endregion Roll
+
+    #region TakeHit
+    public void TakeHit(int damage)
+    {
+        if (hp > 0)
+        {
+            hp -= damage;
+            Debug.Log("으악 아포");
+        }
+    }
+    #endregion TakeHit
 
     #region Methods
     float fastAimingDistance = 0.2f;

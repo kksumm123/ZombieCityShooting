@@ -10,8 +10,10 @@ public class Zombie : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
     Transform target;
+    SphereCollider sphereCollider;
 
     [SerializeField] int hp = 100;
+    [SerializeField] int power = 20;
     float originSpeed;
 
     Coroutine fsmHandle;
@@ -31,7 +33,9 @@ public class Zombie : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         originSpeed = agent.speed;
         target = FindObjectOfType<Player>().transform;
+        sphereCollider = GetComponentInChildren<SphereCollider>(true);
         bloodParticle = (GameObject)Resources.Load("BloodParticle");
+        enemyLayer = 1 << LayerMask.NameToLayer("Player");
 
         CurrentFSM = ChaseFSM;
 
@@ -43,8 +47,14 @@ public class Zombie : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
+    }
+
     #region ChaseFSM
-    [SerializeField] float attackDistance = 3;
+    float attackDistance = 1;
     IEnumerator ChaseFSM()
     {
         if (target)
@@ -63,14 +73,44 @@ public class Zombie : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
         return distance < attackDistance;
     }
+
+    float attackPreDelay = 0.4f;
+    float attackAnimationTime = 0.8f;
+    Collider[] enemyColliders;
+    [SerializeField] LayerMask enemyLayer;
     private IEnumerator AttackFSM()
     {
+        // 타겟 바라보기
+        var lookAtPosition = target.position;
+        lookAtPosition.y = transform.position.y;
+        transform.LookAt(lookAtPosition);
+
         // 공격 애니메이션 하기
+        animator.SetTrigger("Attack");
+
         // 이동 스피드 0
-        // 특정시간 지나면 충돌메시 사용 충돌감지
+        agent.speed = 0;
+
+        // 공격 타이밍까지 대기(특정 시간 지나면)
+        yield return new WaitForSeconds(attackPreDelay);
+
+        // 충돌메시 사용 충돌감지
+        enemyColliders = Physics.OverlapSphere(
+            sphereCollider.transform.position
+            , sphereCollider.radius, enemyLayer);
+        foreach (var enemy in enemyColliders)
+        {
+            enemy.GetComponent<Player>().TakeHit(power);
+        }
+
         // 애니메이션 끝날 때까지 대기
+        yield return new WaitForSeconds(attackAnimationTime - attackPreDelay);
+
         // 이동스피드 복구
+        SetOriginalSpeed();
+
         // FSm 지정
+        CurrentFSM = ChaseFSM;
     }
 
     #endregion ChaseFSM
