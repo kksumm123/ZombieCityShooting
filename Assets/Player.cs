@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public partial class Player : MonoBehaviour
         LookAtMouse();
         Move();
         Fire();
-
+        Roll();
     }
 
     Plane plane = new Plane(new Vector3(0, 1, 0), 0);
@@ -57,7 +58,7 @@ public partial class Player : MonoBehaviour
             move = relateMove;
 
             move.Normalize();
-            transform.Translate(speed * Time.deltaTime * move, Space.World);
+            transform.Translate(speed * rollingSpeedMult * Time.deltaTime * move, Space.World);
             State = StateType.Run;
         }
         else
@@ -72,7 +73,33 @@ public partial class Player : MonoBehaviour
     #region Roll
     void Roll()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            if (State != StateType.Roll)
+                StartCoroutine(RollCo());
+    }
 
+    [SerializeField] AnimationCurve rollingSpeedAC;
+    float rollingSpeedMult = 1;
+    [SerializeField] float rollingSpeedUserMult = 1;
+    IEnumerator RollCo()
+    {
+        // 구르는 애니메이션 실행
+        State = StateType.Roll;
+        animator.SetTrigger("Roll");
+        // 구르는 동안 이동 스피드 빠르게
+        float startTime = Time.time;
+        float endTime = startTime + rollingSpeedAC[rollingSpeedAC.length - 1].time;
+        while (Time.time < endTime)
+        {
+            float time = Time.time - startTime;
+            rollingSpeedMult = rollingSpeedAC.Evaluate(time) * rollingSpeedUserMult;
+            yield return null;
+        }
+
+        State = StateType.Idle;
+
+        // 회전 방향은 처음 바라보던 방향으로 고정
+        // 총알금지, 움직이는거 금지, 마우스 바라보는거 금지.
     }
     #endregion Roll
 
@@ -111,6 +138,7 @@ public partial class Player : MonoBehaviour
         Shoot,
         Hit,
         Death,
+        Roll,
     }
     #endregion State
 }
