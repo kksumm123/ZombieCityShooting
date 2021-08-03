@@ -1,18 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class Zombie : MonoBehaviour
+public class Zombie : Actor
 {
-    Animator animator;
     NavMeshAgent agent;
     Transform target;
     SphereCollider sphereCollider;
 
-    [SerializeField] int hp = 100;
+    
     [SerializeField] int power = 20;
     float originSpeed;
 
@@ -27,21 +27,32 @@ public class Zombie : MonoBehaviour
             fsmHandle = null;
         }
     }
-    IEnumerator Start()
+
+    bool isLive = false;
+    new IEnumerator Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        base.Start();
+
         agent = GetComponent<NavMeshAgent>();
         originSpeed = agent.speed;
         target = FindObjectOfType<Player>().transform;
         sphereCollider = GetComponentInChildren<SphereCollider>(true);
-        bloodParticle = (GameObject)Resources.Load("BloodParticle");
         enemyLayer = 1 << LayerMask.NameToLayer("Player");
 
         CurrentFSM = ChaseFSM;
 
-        while (true) // 상태를 무한히 반복해서 실행하는 부분.
-        {
+        isLive = true;
+
+        while (isLive)
+        { //상태를 무한히 반복해서 실행하는 부분
+            var previousFSM = CurrentFSM;
+
             fsmHandle = StartCoroutine(CurrentFSM());
+
+            // FSM 안에서 에러 발생시 무한 루프 도는 것을 방지하기 위해서 추가함
+            if (fsmHandle == null && previousFSM == CurrentFSM)
+                yield return null;
+
             while (fsmHandle != null)
                 yield return null;
         }
@@ -64,11 +75,12 @@ public class Zombie : MonoBehaviour
         {
             // 타겟이 공격범위 안에 들어왔는가?
             if (TargetIsInAttackArea())
+            {
                 CurrentFSM = AttackFSM;
-
+                yield break;
+            }
             yield return null;
         }
-
         CurrentFSM = ChaseFSM;
     }
 
@@ -80,9 +92,9 @@ public class Zombie : MonoBehaviour
 
     float attackPreDelay = 0.4f;
     float attackAnimationTime = 0.8f;
-    Collider[] enemyColliders;
+    float attackPostDelay = 1f;
     [SerializeField] LayerMask enemyLayer;
-    private IEnumerator AttackFSM()
+    IEnumerator AttackFSM()
     {
         // 타겟 바라보기
         var lookAtPosition = target.position;
@@ -99,9 +111,8 @@ public class Zombie : MonoBehaviour
         yield return new WaitForSeconds(attackPreDelay);
 
         // 충돌메시 사용 충돌감지
-        enemyColliders = Physics.OverlapSphere(
-            sphereCollider.transform.position
-            , sphereCollider.radius, enemyLayer);
+        var enemyColliders = Physics.OverlapSphere(
+            sphereCollider.transform.position, sphereCollider.radius, enemyLayer);
         foreach (var enemy in enemyColliders)
         {
             enemy.GetComponent<Player>().TakeHit(power);
@@ -112,6 +123,9 @@ public class Zombie : MonoBehaviour
 
         // 이동스피드 복구
         SetOriginalSpeed();
+
+        // 공격 후딜레이만큼 대기
+        yield return new WaitForSeconds(attackPostDelay);
 
         // FSm 지정
         CurrentFSM = ChaseFSM;
@@ -124,7 +138,7 @@ public class Zombie : MonoBehaviour
     {
         if (hp > 0)
         {
-            StopCoroutine(fsmHandle);
+            StopCo(fsmHandle);
 
             hp -= damage;
             // 뒤로 밀려나게
@@ -163,18 +177,14 @@ public class Zombie : MonoBehaviour
 
     void Die()
     {
+        isLive = false;
         animator.Play("Die");
         Destroy(gameObject, 2);
     }
     #endregion TakeHit
 
     #region Methods
-    GameObject bloodParticle;
-    void CreateBloodEffect(Transform bulletTr)
-    {
-        Instantiate(bloodParticle, bulletTr.position, Quaternion.identity);
-    }
-
+    
     [SerializeField] float knockBackNoise = 0.1f;
     [SerializeField] float knockBackDistance = 0.1f;
     void KnockBackMove(Vector3 toKnockBackDirection)
@@ -185,5 +195,12 @@ public class Zombie : MonoBehaviour
         toKnockBackDirection.Normalize();
         transform.Translate(toKnockBackDirection * knockBackDistance, Space.World);
     }
+
+    private void StopCo(Coroutine handle)
+    {
+        if (handle != null)
+            StopCoroutine(handle);
+    }
+
     #endregion Methods
 }

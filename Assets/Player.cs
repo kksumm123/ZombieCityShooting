@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Player : MonoBehaviour
+public partial class Player : Actor
 {
-    Animator animator;
-
-    [SerializeField] int hp = 300;
     [SerializeField] float speed = 5;
     [SerializeField] float shootingSpeed = 2.5f;
-    void Start()
+    new void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        base.Start();
+        hp = 300;
+
         bullet = (GameObject)Resources.Load(bulletString);
         bulletLight = GetComponentInChildren<Light>(true).gameObject;
     }

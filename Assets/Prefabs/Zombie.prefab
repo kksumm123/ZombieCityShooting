@@ -142,8 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9d12bd7e8219b449810fb7a6f97d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  attackDistance: 1
+  hp: 99999999
+  power: 20
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   knockBackNoise: 0.1
   knockBackDistance: 0.1
 --- !u!195 &3400689347396863796
