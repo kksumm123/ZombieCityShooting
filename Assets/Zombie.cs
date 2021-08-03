@@ -21,17 +21,17 @@ public class Zombie : MonoBehaviour
         target = FindObjectOfType<Player>().transform;
         bloodParticle = (GameObject)Resources.Load("BloodParticle");
 
-        CurrentFsm = ChaseFSM;
+        CurrentFSM = ChaseFSM;
 
         while (true) // 상태를 무한히 반복해서 실행하는 부분.
         {
-            fsmHandle = StartCoroutine(CurrentFsm());
+            fsmHandle = StartCoroutine(CurrentFSM());
             while (fsmHandle != null)
                 yield return null;
         }
     }
     Coroutine fsmHandle;
-    Func<IEnumerator> CurrentFsm
+    Func<IEnumerator> CurrentFSM
     {
         get { return m_currentFsm; }
         set
@@ -46,28 +46,39 @@ public class Zombie : MonoBehaviour
         if (target)
             agent.destination = target.position;
         yield return new WaitForSeconds(Random.Range(0.5f, 2f));
-        CurrentFsm = ChaseFSM;
+        CurrentFSM = ChaseFSM;
     }
     public void TakeHit(int damage, Transform bulletTr)
     {
-        hp -= damage;
-        animator.Play($"TakeHit{Random.Range(1, 3)}");
-        // 피격 이펙트 생성(피)
-        CreateBloodEffect(bulletTr);
+        if (hp > 0)
+        {
+            hp -= damage;
+            // 뒤로 밀려나게
+            KnockBackMove(bulletTr.forward);
+            // 피격 이펙트 생성(피)
+            CreateBloodEffect(bulletTr);
+            CurrentFSM = TakeHitFSM;
+        }
+    }
 
-        // 뒤로 밀려나게
-        KnockBackMove(bulletTr.forward);
+    float TakeHitStopTime = 0.1f;
+    IEnumerator TakeHitFSM()
+    {
+        animator.Play($"TakeHit{Random.Range(1, 3)}");
 
         // 이동 스피드를 잠시 0으로
         agent.speed = 0;
-        CancelInvoke(nameof(SetTakeHitSpeedCo));
-        Invoke(nameof(SetTakeHitSpeedCo), TakeHitStopTime);
+        yield return new WaitForSeconds(TakeHitStopTime);
+        SetOriginalSpeed();
 
         if (hp <= 0)
         {
             GetComponent<Collider>().enabled = false;
-            Invoke(nameof(Die), 1);
+            yield return new WaitForSeconds(1);
+            Die();
         }
+
+        CurrentFSM = ChaseFSM;
     }
 
     GameObject bloodParticle;
@@ -87,8 +98,7 @@ public class Zombie : MonoBehaviour
         transform.Translate(toKnockBackDirection * knockBackDistance, Space.World);
     }
 
-    float TakeHitStopTime = 0.1f;
-    void SetTakeHitSpeedCo()
+    void SetOriginalSpeed()
     {
         agent.speed = originSpeed;
     }
