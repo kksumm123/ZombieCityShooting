@@ -113,6 +113,7 @@ public class Zombie : Actor
         // 충돌메시 사용 충돌감지
         var enemyColliders = Physics.OverlapSphere(
             sphereCollider.transform.position, sphereCollider.radius, enemyLayer);
+        Debug.Log(sphereCollider.transform.position);
         foreach (var enemy in enemyColliders)
         {
             enemy.GetComponent<Player>().TakeHit(power);
