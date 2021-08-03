@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Zombie : MonoBehaviour
 {
@@ -19,15 +21,33 @@ public class Zombie : MonoBehaviour
         target = FindObjectOfType<Player>().transform;
         bloodParticle = (GameObject)Resources.Load("BloodParticle");
 
-        while (hp > 0)
+        CurrentFsm = ChaseFSM;
+
+        while (true) // 상태를 무한히 반복해서 실행하는 부분.
         {
-            if (target)
-                agent.destination = target.position;
-            yield return new WaitForSeconds(Random.Range(0.5f, 2f));
-            // 여기서 걸려서 idle이 되는거같아요 
+            fsmHandle = StartCoroutine(CurrentFsm());
+            while (fsmHandle != null)
+                yield return null;
         }
     }
-
+    Coroutine fsmHandle;
+    Func<IEnumerator> CurrentFsm
+    {
+        get { return m_currentFsm; }
+        set
+        {
+            m_currentFsm = value;
+            fsmHandle = null;
+        }
+    }
+    Func<IEnumerator> m_currentFsm;
+    IEnumerator ChaseFSM()
+    {
+        if (target)
+            agent.destination = target.position;
+        yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+        CurrentFsm = ChaseFSM;
+    }
     public void TakeHit(int damage, Transform bulletTr)
     {
         hp -= damage;
