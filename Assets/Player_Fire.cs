@@ -10,12 +10,14 @@ public partial class Player : MonoBehaviour
 
 
     float shootDelayEndTime;
+    bool isFiring = false;
     void Fire()
     {
         if (Input.GetMouseButton(0))
         {
             if (shootDelayEndTime < Time.time)
             {
+                isFiring = true;
                 animator.SetBool("Fire", true);
                 shootDelayEndTime = Time.time + shootDelay;
                 IncreaseRecoil();
@@ -23,10 +25,14 @@ public partial class Player : MonoBehaviour
             }
         }
         else
-        {
-            animator.SetBool("Fire", false);
-            DecreaseRecoil();
-        }
+            EndFiring();
+    }
+
+    private void EndFiring()
+    {
+        isFiring = false;
+        animator.SetBool("Fire", false);
+        DecreaseRecoil();
     }
 
     GameObject bulletLight;

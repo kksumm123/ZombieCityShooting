@@ -8,6 +8,7 @@ public partial class Player : MonoBehaviour
     Animator animator;
 
     [SerializeField] float speed = 5;
+    [SerializeField] float shootingSpeed = 2.5;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -18,10 +19,13 @@ public partial class Player : MonoBehaviour
 
     void Update()
     {
-        LookAtMouse();
-        Move();
-        Fire();
-        Roll();
+        if (State != StateType.Roll)
+        {
+            LookAtMouse();
+            Move();
+            Fire();
+            Roll();
+        }
     }
 
     Plane plane = new Plane(new Vector3(0, 1, 0), 0);
@@ -74,8 +78,7 @@ public partial class Player : MonoBehaviour
     void Roll()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            if (State != StateType.Roll)
-                StartCoroutine(RollCo());
+            StartCoroutine(RollCo());
     }
 
     [SerializeField] AnimationCurve rollingSpeedAC;
@@ -83,9 +86,12 @@ public partial class Player : MonoBehaviour
     [SerializeField] float rollingSpeedUserMult = 1;
     IEnumerator RollCo()
     {
+        animator.SetBool("Fire", false);
+
         // 구르는 애니메이션 실행
         State = StateType.Roll;
         animator.SetTrigger("Roll");
+
         // 구르는 동안 이동 스피드 빠르게
         float startTime = Time.time;
         float endTime = startTime + rollingSpeedAC[rollingSpeedAC.length - 1].time;
@@ -93,6 +99,9 @@ public partial class Player : MonoBehaviour
         {
             float time = Time.time - startTime;
             rollingSpeedMult = rollingSpeedAC.Evaluate(time) * rollingSpeedUserMult;
+
+            transform.Translate(speed * rollingSpeedMult * Time.deltaTime * transform.forward, Space.World);
+            EndFiring();
             yield return null;
         }
 
@@ -137,7 +146,7 @@ public partial class Player : MonoBehaviour
         Run,
         Shoot,
         Hit,
-        Death,
+        Die,
         Roll,
     }
     #endregion State
