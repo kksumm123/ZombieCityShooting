@@ -8,7 +8,7 @@ public partial class Player : MonoBehaviour
     Animator animator;
 
     [SerializeField] float speed = 5;
-    [SerializeField] float shootingSpeed = 2.5;
+    [SerializeField] float shootingSpeed = 2.5f;
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
