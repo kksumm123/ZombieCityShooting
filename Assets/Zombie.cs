@@ -59,13 +59,17 @@ public class Zombie : MonoBehaviour
     {
         if (target)
             agent.destination = target.position;
-        yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+        var endTime = Time.time + Random.Range(0.5f, 2f);
+        while (Time.time < endTime)
+        {
+            // 타겟이 공격범위 안에 들어왔는가?
+            if (TargetIsInAttackArea())
+                CurrentFSM = AttackFSM;
 
-        // 타겟이 공격범위 안에 들어왔는가?
-        if (TargetIsInAttackArea())
-            CurrentFSM = AttackFSM;
-        else
-            CurrentFSM = ChaseFSM;
+            yield return null;
+        }
+
+        CurrentFSM = ChaseFSM;
     }
 
     private bool TargetIsInAttackArea()
