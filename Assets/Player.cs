@@ -62,7 +62,10 @@ public partial class Player : MonoBehaviour
             move = relateMove;
 
             move.Normalize();
-            transform.Translate(speed * rollingSpeedMult * Time.deltaTime * move, Space.World);
+
+            transform.Translate( 
+                (isFiring == true ? shootingSpeed : speed)
+                * rollingSpeedMult * Time.deltaTime * move, Space.World);
             State = StateType.Run;
         }
         else
