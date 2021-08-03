@@ -13,6 +13,18 @@ public class Zombie : MonoBehaviour
 
     [SerializeField] int hp = 100;
     float originSpeed;
+
+    Coroutine fsmHandle;
+    Func<IEnumerator> m_currentFsm;
+    Func<IEnumerator> CurrentFSM
+    {
+        get { return m_currentFsm; }
+        set
+        {
+            m_currentFsm = value;
+            fsmHandle = null;
+        }
+    }
     IEnumerator Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -30,24 +42,40 @@ public class Zombie : MonoBehaviour
                 yield return null;
         }
     }
-    Coroutine fsmHandle;
-    Func<IEnumerator> CurrentFSM
-    {
-        get { return m_currentFsm; }
-        set
-        {
-            m_currentFsm = value;
-            fsmHandle = null;
-        }
-    }
-    Func<IEnumerator> m_currentFsm;
+
+    #region ChaseFSM
+    [SerializeField] float attackDistance = 3;
     IEnumerator ChaseFSM()
     {
         if (target)
             agent.destination = target.position;
         yield return new WaitForSeconds(Random.Range(0.5f, 2f));
-        CurrentFSM = ChaseFSM;
+
+        // 타겟이 공격범위 안에 들어왔는가?
+        if (TargetIsInAttackArea())
+            CurrentFSM = AttackFSM;
+        else
+            CurrentFSM = ChaseFSM;
     }
+
+    private bool TargetIsInAttackArea()
+    {
+        float distance = Vector3.Distance(transform.position, target.position);
+        return distance < attackDistance;
+    }
+    private IEnumerator AttackFSM()
+    {
+        // 공격 애니메이션 하기
+        // 이동 스피드 0
+        // 특정시간 지나면 충돌메시 사용 충돌감지
+        // 애니메이션 끝날 때까지 대기
+        // 이동스피드 복구
+        // FSm 지정
+    }
+
+    #endregion ChaseFSM
+
+    #region TakeHit
     public void TakeHit(int damage, Transform bulletTr)
     {
         if (hp > 0)
@@ -68,19 +96,33 @@ public class Zombie : MonoBehaviour
 
         // 이동 스피드를 잠시 0으로
         agent.speed = 0;
-        yield return new WaitForSeconds(TakeHitStopTime);
-        SetOriginalSpeed();
 
         if (hp <= 0)
         {
             GetComponent<Collider>().enabled = false;
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
             Die();
         }
+
+        yield return new WaitForSeconds(TakeHitStopTime);
+        SetOriginalSpeed();
 
         CurrentFSM = ChaseFSM;
     }
 
+    void SetOriginalSpeed()
+    {
+        agent.speed = originSpeed;
+    }
+
+    void Die()
+    {
+        animator.Play("Die");
+        Destroy(gameObject, 2);
+    }
+    #endregion TakeHit
+
+    #region Methods
     GameObject bloodParticle;
     void CreateBloodEffect(Transform bulletTr)
     {
@@ -97,15 +139,5 @@ public class Zombie : MonoBehaviour
         toKnockBackDirection.Normalize();
         transform.Translate(toKnockBackDirection * knockBackDistance, Space.World);
     }
-
-    void SetOriginalSpeed()
-    {
-        agent.speed = originSpeed;
-    }
-
-    void Die()
-    {
-        animator.Play("Die");
-        Destroy(gameObject, 1);
-    }
+    #endregion Methods
 }
