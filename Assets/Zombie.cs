@@ -12,7 +12,7 @@ public class Zombie : Actor
     Transform target;
     SphereCollider sphereCollider;
 
-    
+
     [SerializeField] int power = 20;
     float originSpeed;
 
@@ -70,18 +70,36 @@ public class Zombie : Actor
     {
         if (target)
             agent.destination = target.position;
-        var endTime = Time.time + Random.Range(0.5f, 2f);
-        while (Time.time < endTime)
+        yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+
+        SetAttackOrChaseFSM();
+    }
+
+    private void SetAttackOrChaseFSM()
+    {
+        if (IsAttackableTarget())
         {
             // 타겟이 공격범위 안에 들어왔는가?
             if (TargetIsInAttackArea())
-            {
                 CurrentFSM = AttackFSM;
-                yield break;
-            }
-            yield return null;
+            else
+                CurrentFSM = ChaseFSM;
         }
-        CurrentFSM = ChaseFSM;
+        else
+        {
+            print("배회하기 구현해야함");
+            // 공격 가능한 타겟 찾기
+
+            // 공격 가능한 타겟 없다면
+            // 배회하기, 혹은 제자리 가만히 있기
+        }
+    }
+
+    bool IsAttackableTarget()
+    {
+        if (target.GetComponent<Player>().State == Player.StateType.Die)
+            return false;
+        return true;
     }
 
     private bool TargetIsInAttackArea()
@@ -128,7 +146,7 @@ public class Zombie : Actor
         yield return new WaitForSeconds(attackPostDelay);
 
         // FSm 지정
-        CurrentFSM = ChaseFSM;
+        SetAttackOrChaseFSM();
     }
 
     #endregion ChaseFSM
@@ -184,7 +202,7 @@ public class Zombie : Actor
     #endregion TakeHit
 
     #region Methods
-    
+
     [SerializeField] float knockBackNoise = 0.1f;
     [SerializeField] float knockBackDistance = 0.1f;
     void KnockBackMove(Vector3 toKnockBackDirection)

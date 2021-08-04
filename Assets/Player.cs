@@ -160,7 +160,7 @@ public partial class Player : Actor
     #region State
     [SerializeField] StateType m_state;
 
-    StateType State
+    public StateType State
     {
         get => m_state;
         set
@@ -173,7 +173,7 @@ public partial class Player : Actor
         }
     }
 
-    enum StateType
+    public enum StateType
     {
         Idle,
         Run,
