@@ -12,7 +12,7 @@ public class Zombie : Actor
     Transform target;
     SphereCollider sphereCollider;
 
-
+    [SerializeField] int rewardScore = 100;
     [SerializeField] int power = 20;
     float originSpeed;
 
@@ -178,8 +178,10 @@ public class Zombie : Actor
         if (hp <= 0)
         {
             GetComponent<Collider>().enabled = false;
-            yield return new WaitForSeconds(2);
+            //피격 모션 대기
+            yield return new WaitForSeconds(1);
             Die();
+            yield break;
         }
 
         yield return new WaitForSeconds(TakeHitStopTime);
@@ -196,6 +198,7 @@ public class Zombie : Actor
     void Die()
     {
         isLive = false;
+        StageManager.Instance.AddScore(rewardScore);
         animator.Play("Die");
         Destroy(gameObject, 2);
     }

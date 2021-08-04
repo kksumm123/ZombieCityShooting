@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9d12bd7e8219b449810fb7a6f97d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 99999999
+  hp: 100
+  rewardScore: 100
   power: 20
   enemyLayer:
     serializedVersion: 2
