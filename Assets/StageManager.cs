@@ -12,6 +12,7 @@ public class StageManager : SingletonMonoBehavior<StageManager>
     {
         base.Awake();
         highScore = new SaveInt("highScore");
+        ScoreUIRefresh();
     }
 
 

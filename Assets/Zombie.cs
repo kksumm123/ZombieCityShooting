@@ -157,7 +157,6 @@ public class Zombie : Actor
         if (hp > 0)
         {
             StopCo(fsmHandle);
-
             hp -= damage;
             // 뒤로 밀려나게
             KnockBackMove(bulletTr.forward);
@@ -178,8 +177,6 @@ public class Zombie : Actor
         if (hp <= 0)
         {
             GetComponent<Collider>().enabled = false;
-            //피격 모션 대기
-            yield return new WaitForSeconds(1);
             Die();
             yield break;
         }
