@@ -5,6 +5,8 @@ using UnityEngine;
 
 public partial class Player : Actor
 {
+    CapsuleCollider capsuleCol;
+
     [SerializeField] float speed = 5;
     [SerializeField] float shootingSpeed = 2.5f;
     new void Start()
@@ -12,6 +14,7 @@ public partial class Player : Actor
         base.Start();
         hp = 300;
 
+        capsuleCol = GetComponent<CapsuleCollider>();
         bullet = (GameObject)Resources.Load(bulletString);
         bulletLight = GetComponentInChildren<Light>(true).gameObject;
     }
@@ -124,7 +127,7 @@ public partial class Player : Actor
         if (hp > 0)
         {
             hp -= damage;
-            CreateBloodEffect(transform.position);
+            CreateBloodEffect(capsuleCol.transform.position);
             animator.SetTrigger("TakeHit");
 
             if (hp <= 0)
