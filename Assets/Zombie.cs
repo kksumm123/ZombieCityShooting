@@ -145,7 +145,7 @@ public class Zombie : Actor
             // 뒤로 밀려나게
             KnockBackMove(bulletTr.forward);
             // 피격 이펙트 생성(피)
-            CreateBloodEffect(bulletTr);
+            CreateBloodEffect(bulletTr.position);
             CurrentFSM = TakeHitFSM;
         }
     }

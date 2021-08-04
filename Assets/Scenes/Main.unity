@@ -8950,7 +8950,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036430319}
-  m_LocalRotation: {x: 0.9633969, y: 0.0052000806, z: 0.018737068, w: -0.26737294}
+  m_LocalRotation: {x: 0.9633969, y: 0.005200091, z: 0.018737104, w: -0.26737297}
   m_LocalPosition: {x: 5.4334373, y: -0.00000047500617, z: -16.494255}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9760,10 +9760,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1148029883, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
-      propertyPath: m_Radius
-      value: 1.53
-      objectReference: {fileID: 0}
     - target: {fileID: 1058530953591750807, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
       propertyPath: m_Name
       value: Zombie

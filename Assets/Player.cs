@@ -19,12 +19,15 @@ public partial class Player : Actor
 
     void Update()
     {
-        if (State != StateType.Roll)
+        if (State != StateType.Hit && State != StateType.Die)
         {
-            LookAtMouse();
-            Move();
-            Fire();
-            Roll();
+            if (State != StateType.Roll)
+            {
+                LookAtMouse();
+                Move();
+                Fire();
+                Roll();
+            }
         }
     }
 
@@ -63,7 +66,7 @@ public partial class Player : Actor
 
             move.Normalize();
 
-            transform.Translate( 
+            transform.Translate(
                 (isFiring == true ? shootingSpeed : speed)
                 * rollingSpeedMult * Time.deltaTime * move, Space.World);
             State = StateType.Run;
@@ -121,8 +124,21 @@ public partial class Player : Actor
         if (hp > 0)
         {
             hp -= damage;
-            Debug.Log("À¸¾Ç ¾ÆÆ÷");
+            CreateBloodEffect(transform.position);
+            animator.SetTrigger("TakeHit");
+
+            if (hp <= 0)
+                DieCo();
         }
+    }
+
+    [SerializeField] float diePreDelayTime = 0.4f;
+    IEnumerator DieCo()
+    {
+        State = StateType.Die;
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(diePreDelayTime);
+        animator.SetTrigger("Die");
     }
     #endregion TakeHit
 

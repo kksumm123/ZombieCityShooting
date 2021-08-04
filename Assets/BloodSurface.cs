@@ -14,7 +14,7 @@ public class BloodSurface : MonoBehaviour
         foreach (var item in collisionEvent)
         {
             //print(item.intersection);
-            Quaternion rotate = 
+            Quaternion rotate =
                 Quaternion.Euler(0
                                 , item.velocity.VectorToDegree() + Random.Range(-90, 90)
                                 , 0);

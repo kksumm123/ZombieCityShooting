@@ -14,9 +14,9 @@ public class Actor : MonoBehaviour
     }
 
     GameObject bloodParticle;
-    protected void CreateBloodEffect(Transform weaponTr)
+    protected void CreateBloodEffect(Vector3 hitPoint)
     {
-        Instantiate(bloodParticle, weaponTr.position, Quaternion.identity);
+        Instantiate(bloodParticle, hitPoint, Quaternion.identity);
     }
 
 }
