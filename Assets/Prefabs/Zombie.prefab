@@ -148,6 +148,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  destroyTime: 2
   knockBackNoise: 0.1
   knockBackDistance: 0.1
 --- !u!195 &3400689347396863796
