@@ -23,6 +23,8 @@ public class Zombie : Actor
         get { return m_currentFsm; }
         set
         {
+            StopCo(fsmHandle);
+
             m_currentFsm = value;
             fsmHandle = null;
         }
@@ -156,7 +158,6 @@ public class Zombie : Actor
     {
         if (hp > 0)
         {
-            StopCo(fsmHandle);
             hp -= damage;
             // 뒤로 밀려나게
             KnockBackMove(bulletTr.forward);
@@ -186,18 +187,13 @@ public class Zombie : Actor
 
         CurrentFSM = ChaseFSM;
     }
-
-    void SetOriginalSpeed()
-    {
-        agent.speed = originSpeed;
-    }
-
+    [SerializeField] float destroyTime = 2;
     void Die()
     {
         isLive = false;
         StageManager.Instance.AddScore(rewardScore);
         animator.Play("Die");
-        Destroy(gameObject, 2);
+        Destroy(gameObject, destroyTime);
     }
     #endregion TakeHit
 
@@ -219,6 +215,9 @@ public class Zombie : Actor
         if (handle != null)
             StopCoroutine(handle);
     }
-
+    void SetOriginalSpeed()
+    {
+        agent.speed = originSpeed;
+    }
     #endregion Methods
 }
