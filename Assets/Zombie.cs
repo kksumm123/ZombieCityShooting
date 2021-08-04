@@ -41,6 +41,8 @@ public class Zombie : Actor
         sphereCollider = GetComponentInChildren<SphereCollider>(true);
         enemyLayer = 1 << LayerMask.NameToLayer("Player");
 
+        yield return new WaitForSeconds(Random.Range(0.1f, 1f));
+
         CurrentFSM = ChaseFSM;
 
         isLive = true;
@@ -71,8 +73,13 @@ public class Zombie : Actor
     IEnumerator ChaseFSM()
     {
         if (target)
+        {
             agent.destination = target.position;
-        yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+            animator.SetTrigger("SetRun");
+            yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+        }
+        else
+            animator.SetTrigger("SetIdle");
 
         SetAttackOrChaseFSM();
     }
