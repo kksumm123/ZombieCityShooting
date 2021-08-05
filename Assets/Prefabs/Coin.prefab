@@ -133,6 +133,7 @@ MonoBehaviour:
   amount: 50
   itemID: 0
   testColor: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &4936326001660545817
 PrefabInstance:
   m_ObjectHideFlags: 0
