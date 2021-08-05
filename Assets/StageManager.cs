@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StageManager : SingletonMonoBehavior<StageManager>
 {
+    public SaveInt gold;
     public SaveInt highScore;
     public int score;
 
@@ -13,6 +14,7 @@ public class StageManager : SingletonMonoBehavior<StageManager>
         base.Awake();
         highScore = new SaveInt("highScore");
         ScoreUIRefresh();
+        GoldUIRefresh();
     }
 
 
@@ -30,5 +32,16 @@ public class StageManager : SingletonMonoBehavior<StageManager>
     void ScoreUIRefresh()
     {
         ScoreUI.Instance.UpdateUI(score, highScore.Value);
+    }
+
+    public void AddGold(int value)
+    {
+        gold += value;
+        GoldUIRefresh();
+    }
+
+    void GoldUIRefresh()
+    {
+        GoldUI.Instance.UpdateUI(gold);
     }
 }

@@ -499,7 +499,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70923012}
-  m_LocalRotation: {x: 0.2276208, y: -0.31656137, z: 0.07853493, w: 0.91750205}
+  m_LocalRotation: {x: 0.22762081, y: -0.31656143, z: 0.07853493, w: 0.91750205}
   m_LocalPosition: {x: 1.2730408, y: 0, z: -11.199696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -713,6 +713,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completeUiInite: 0
+  gold:
+    key: 
+    value: 0
   highScore:
     key: 
     value: 0
@@ -5504,7 +5507,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.2276208, y: -0.31656137, z: 0.07853493, w: 0.91750205}
+  m_LocalRotation: {x: 0.22762081, y: -0.31656143, z: 0.07853493, w: 0.91750205}
   m_LocalPosition: {x: 18.57304, y: 10, z: -6.0996957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7707,6 +7710,7 @@ GameObject:
   - component: {fileID: 1515950508}
   - component: {fileID: 1515950510}
   - component: {fileID: 1515950509}
+  - component: {fileID: 1515950511}
   m_Layer: 5
   m_Name: GoldUI
   m_TagString: Untagged
@@ -7774,6 +7778,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515950507}
   m_CullTransparentMesh: 1
+--- !u!114 &1515950511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515950507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01304d99cf55f124b8cb4cd9bcd7ca74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completeUiInite: 0
 --- !u!1 &1519855281
 GameObject:
   m_ObjectHideFlags: 0
@@ -8302,7 +8319,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650417690}
-  m_LocalRotation: {x: 0.26938903, y: -0.46757835, z: 0.15211771, w: 0.828046}
+  m_LocalRotation: {x: 0.26938903, y: -0.46757838, z: 0.15211773, w: 0.8280461}
   m_LocalPosition: {x: 5.0776825, y: 0, z: -3.1073713}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

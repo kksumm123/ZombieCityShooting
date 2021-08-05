@@ -35,7 +35,7 @@ using UnityEngine;
 //#endif
 
 [Serializable]
-public class SaveInt 
+public class SaveInt
 {
     [SerializeField]
     string key;
@@ -72,5 +72,25 @@ public class SaveInt
     public override string ToString()
     {
         return Value.ToString();
+    }
+    public static implicit operator int(SaveInt saveInt)
+    {
+        return saveInt.value;
+    }
+    void SetValue(int value)
+    {
+        PlayerPrefs.SetInt(key, value);
+        PlayerPrefs.Save();
+        this.value = value;
+    }
+    public static SaveInt operator +(SaveInt a, int b)
+    {
+        a.SetValue(a.value + b);
+        return a;
+    }
+    public static SaveInt operator -(SaveInt a, int b)
+    {
+        a.SetValue(a.value - b);
+        return a;
     }
 }
