@@ -5,11 +5,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] int power = 20;
+    [SerializeField] int randomPower = 4;
     [SerializeField] float speed = 20;
     [SerializeField] float destroyTime = 1;
     void Start()
     {
         Destroy(gameObject, destroyTime);
+        power += Random.Range(-randomPower, randomPower);
     }
 
     // Update is called once per frame
