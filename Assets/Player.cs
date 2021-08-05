@@ -6,6 +6,7 @@ using UnityEngine;
 public partial class Player : Actor
 {
     CapsuleCollider capsuleCol;
+    Transform bulletSpawnPosition;
 
     [SerializeField] float speed = 5;
     [SerializeField] float shootingSpeed = 2.5f;
@@ -16,6 +17,7 @@ public partial class Player : Actor
 
         capsuleCol = GetComponent<CapsuleCollider>();
         bullet = (GameObject)Resources.Load(bulletString);
+        bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
         bulletLight = GetComponentInChildren<Light>(true).gameObject;
     }
 

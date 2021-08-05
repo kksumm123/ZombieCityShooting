@@ -6,8 +6,6 @@ public partial class Player : Actor
 {
     const string bulletString = "Bullet";
     GameObject bullet;
-    public Transform bulletSpawnPosition;
-
 
     float shootDelayEndTime;
     bool isFiring = false;
