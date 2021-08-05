@@ -25,6 +25,7 @@ public class MoveToPlayer : MonoBehaviour
 
                 while (other != null)
                 {
+                    Debug.Log("2");
                     agent.destination = other.transform.position;
                     yield return null;
                 }
@@ -33,6 +34,8 @@ public class MoveToPlayer : MonoBehaviour
     }
     void OnDestroy()
     {
+        Debug.Log("1");
+        StopAllCoroutines();
         dotweenHandle.Kill();
     }
 }
