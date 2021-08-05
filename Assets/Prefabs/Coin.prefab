@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f319abbc118f1ed42a9d7096318a2565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getMethod: 0
+  keyCode: 101
   type: 0
   amount: 50
   itemID: 0

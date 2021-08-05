@@ -9,6 +9,13 @@ public enum DropItemType
 }
 public class DroppedItem : MonoBehaviour
 {
+    public enum GetMethodType
+    {
+        TriggerEnter,
+        KeyDown,
+    }
+    [SerializeField] GetMethodType getMethod;
+    [SerializeField] KeyCode keyCode = KeyCode.E;
     [SerializeField] DropItemType type;
     [SerializeField] int amount;
     [SerializeField] int itemID;
@@ -20,18 +27,48 @@ public class DroppedItem : MonoBehaviour
             return;
         if (other.CompareTag("Player"))
         {
-            isAttaced = true;
-            switch (type)
+            switch (getMethod)
             {
-                case DropItemType.Gold:
-                    StageManager.Instance.AddGold(amount);
+                case GetMethodType.TriggerEnter:
+                    GetItem();
                     break;
-                case DropItemType.Point:
-                    break;
-                case DropItemType.Item:
+                case GetMethodType.KeyDown:
+                    enabled = true;
                     break;
             }
-            Destroy(transform.parent.gameObject);
         }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            enabled = false;
+    }
+    void Awake()
+    {
+        enabled = false;
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(keyCode))
+        {
+            enabled = false;
+            GetItem();
+        }
+    }
+
+    private void GetItem()
+    {
+        isAttaced = true;
+        switch (type)
+        {
+            case DropItemType.Gold:
+                StageManager.Instance.AddGold(amount);
+                break;
+            case DropItemType.Point:
+                break;
+            case DropItemType.Item:
+                break;
+        }
+        Destroy(transform.parent.gameObject);
     }
 }

@@ -29,4 +29,8 @@ public class MoveToPlayer : MonoBehaviour
             }
         }
     }
+    void OnDestroy()
+    {
+        DOTween.KillAll();
+    }
 }
