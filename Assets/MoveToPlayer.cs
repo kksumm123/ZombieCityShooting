@@ -15,7 +15,7 @@ public class MoveToPlayer : MonoBehaviour
         {
             agent = GetComponent<NavMeshAgent>();
 
-            DOTween.To(() => 1f, (x) => agent.speed = x, maxSpeed, duration);
+            DOTween.To(() => agent.speed, (x) => agent.speed = x, maxSpeed, duration);
         }
     }
 }
