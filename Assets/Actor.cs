@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
     protected Animator animator;
+    GameObject textEffectGo;
 
     [SerializeField] protected int hp = 100;
     protected void Start()
     {
         animator = GetComponentInChildren<Animator>();
         bloodParticle = (GameObject)Resources.Load("BloodParticle");
+        textEffectGo = (GameObject)Resources.Load("TextEffect");
     }
 
     GameObject bloodParticle;
@@ -18,5 +21,17 @@ public class Actor : MonoBehaviour
     {
         Instantiate(bloodParticle, hitPoint, Quaternion.identity);
     }
-
+    public Color damageColor = Color.white;
+    protected void TakeHit(int damage)
+    {
+        hp -= damage;
+        CreateTextEffect(damage, damageColor);
+    }
+    protected void CreateTextEffect(int damage, Color color)
+    {
+        var newGo = Instantiate(textEffectGo, transform.position, Camera.main.transform.rotation);
+        var textMeshPro = newGo.GetComponent<TextMeshPro>();
+        textMeshPro.text = damage.ToNumber();
+        textMeshPro.color = color;
+    }
 }

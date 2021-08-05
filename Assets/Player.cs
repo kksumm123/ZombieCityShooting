@@ -122,11 +122,11 @@ public partial class Player : Actor
     #endregion Roll
 
     #region TakeHit
-    public void TakeHit(int damage)
+    new public void TakeHit(int damage)
     {
         if (hp > 0)
         {
-            hp -= damage;
+            base.TakeHit(damage);
             CreateBloodEffect(capsuleCol.transform.position);
             animator.SetTrigger("TakeHit");
 

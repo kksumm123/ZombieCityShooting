@@ -165,11 +165,12 @@ public class Zombie : Actor
     {
         if (hp > 0)
         {
-            hp -= damage;
+            base.TakeHit(damage);
             // 뒤로 밀려나게
             KnockBackMove(bulletTr.forward);
             // 피격 이펙트 생성(피)
             CreateBloodEffect(bulletTr.position);
+
             CurrentFSM = TakeHitFSM;
         }
     }
