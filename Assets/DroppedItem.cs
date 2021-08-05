@@ -56,12 +56,14 @@ public class DroppedItem : MonoBehaviour
         }
     }
 
+    [SerializeField] Color color = Color.white;
     private void GetItem()
     {
         isAttaced = true;
         switch (type)
         {
             case DropItemType.Gold:
+                Actor.CreateTextEffect(amount, transform.position, color);
                 StageManager.Instance.AddGold(amount);
                 break;
             case DropItemType.Point:

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
     protected Animator animator;
-    GameObject textEffectGo;
+    static GameObject textEffectGo;
 
     [SerializeField] protected int hp = 100;
     protected void Start()
@@ -25,14 +25,14 @@ public class Actor : MonoBehaviour
     protected void TakeHit(int damage)
     {
         hp -= damage;
-        CreateTextEffect(damage, damageColor);
+        CreateTextEffect(damage, transform.position, damageColor);
     }
-    protected void CreateTextEffect(int damage, Color color)
+    public static void CreateTextEffect(int value, Vector3 position, Color color)
     {
         var randomPos = new Vector3(Random.Range(-0.3f, 0.3f), 0, Random.Range(-0.1f, 0.1f));
-        var newGo = Instantiate(textEffectGo, transform.position + randomPos, Camera.main.transform.rotation);
+        var newGo = Instantiate(textEffectGo, position + randomPos, Camera.main.transform.rotation);
         var textMeshPro = newGo.GetComponent<TextMeshPro>();
-        textMeshPro.text = damage.ToNumber();
+        textMeshPro.text = value.ToNumber();
         textMeshPro.color = color;
         Destroy(newGo, 1.5f);
     }
