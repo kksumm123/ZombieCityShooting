@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public partial class Player : Actor
 {
@@ -21,6 +22,12 @@ public partial class Player : Actor
         bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
         bulletLight = GetComponentInChildren<Light>(true).gameObject;
         animator.runtimeAnimatorController = currentWeapon.overrideController;
+        var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
+        foreach (var item in vcs)
+        {
+            item.Follow = transform;
+            item.LookAt = transform;
+        }
     }
 
 
