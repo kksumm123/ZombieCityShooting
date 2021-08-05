@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RifleWeaponInfo
   m_EditorClassIdentifier: 
   damage: 20
-  overrideController: {fileID: 22100000, guid: 5c27d6ee385d626468d48d0de8aa6837, type: 2}
-  weaponGo: {fileID: 5994505434078392105, guid: 500c7866cf0773a4fbce528ea8f381b9, type: 3}
+  overrideController: {fileID: 22100000, guid: ae2f0be4f37f5c44cb31356c3cd5407f, type: 2}
+  weaponGo: {fileID: 8467637446516301523, guid: 1a6cb6b54d0a9414ca4ea6100771a429, type: 3}

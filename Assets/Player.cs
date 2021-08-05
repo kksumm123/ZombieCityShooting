@@ -9,6 +9,7 @@ public partial class Player : Actor
     CapsuleCollider capsuleCol;
     Transform bulletSpawnPosition;
     [SerializeField] WeaponInfo currentWeapon;
+    [SerializeField] Transform rightWeaponPosition;
 
     [SerializeField] float speed = 5;
     [SerializeField] float shootingSpeed = 2.5f;
@@ -21,6 +22,10 @@ public partial class Player : Actor
         bullet = (GameObject)Resources.Load(bulletString);
         bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
         bulletLight = GetComponentInChildren<Light>(true).gameObject;
+        var newWeaponGo = Instantiate(currentWeapon.weaponGo, rightWeaponPosition);
+        newWeaponGo.transform.localPosition = currentWeapon.weaponGo.transform.localPosition;
+        newWeaponGo.transform.localRotation = currentWeapon.weaponGo.transform.localRotation;
+        newWeaponGo.transform.localScale = currentWeapon.weaponGo.transform.localScale;
         animator.runtimeAnimatorController = currentWeapon.overrideController;
         var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var item in vcs)
@@ -29,7 +34,6 @@ public partial class Player : Actor
             item.LookAt = transform;
         }
     }
-
 
     void Update()
     {
@@ -88,9 +92,9 @@ public partial class Player : Actor
         else
             State = StateType.Idle;
 
-        animator.SetFloat("DirX", move.x);
-        animator.SetFloat("DirY", move.z);
-        animator.SetFloat("Speed", move.sqrMagnitude);
+        animator.SetFloat("DirX", transform.forward.x);
+        animator.SetFloat("DirY", transform.forward.z);
+        animator.SetFloat("Speed", transform.forward.sqrMagnitude);
     }
     #endregion Move
 
