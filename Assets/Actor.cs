@@ -29,9 +29,11 @@ public class Actor : MonoBehaviour
     }
     protected void CreateTextEffect(int damage, Color color)
     {
-        var newGo = Instantiate(textEffectGo, transform.position, Camera.main.transform.rotation);
+        var randomPos = new Vector3(Random.Range(-0.3f, 0.3f), 0, Random.Range(-0.1f, 0.1f));
+        var newGo = Instantiate(textEffectGo, transform.position + randomPos, Camera.main.transform.rotation);
         var textMeshPro = newGo.GetComponent<TextMeshPro>();
         textMeshPro.text = damage.ToNumber();
         textMeshPro.color = color;
+        Destroy(newGo, 1.5f);
     }
 }
