@@ -9,13 +9,24 @@ public class MoveToPlayer : MonoBehaviour
     NavMeshAgent agent;
     [SerializeField] float maxSpeed = 20;
     [SerializeField] float duration = 3;
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            agent = GetComponent<NavMeshAgent>();
+    bool isAttached = false;
 
-            DOTween.To(() => agent.speed, (x) => agent.speed = x, maxSpeed, duration);
+    IEnumerator OnTriggerEnter(Collider other)
+    {
+        if (isAttached == false)
+        {
+            if (other.CompareTag("Player"))
+            {
+                isAttached = true;
+                agent = GetComponent<NavMeshAgent>();
+                DOTween.To(() => agent.speed, (x) => agent.speed = x, maxSpeed, duration);
+
+                while (other != null)
+                {
+                    agent.destination = other.transform.position;
+                    yield return null;
+                }
+            }
         }
     }
 }
