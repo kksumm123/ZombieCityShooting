@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 
 public class MoveToPlayer : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class MoveToPlayer : MonoBehaviour
     [SerializeField] float maxSpeed = 20;
     [SerializeField] float duration = 3;
     bool isAttached = false;
-
+    TweenerCore<float, float, FloatOptions> dotweenHandle;
     IEnumerator OnTriggerEnter(Collider other)
     {
         if (isAttached == false)
@@ -19,7 +21,7 @@ public class MoveToPlayer : MonoBehaviour
             {
                 isAttached = true;
                 agent = GetComponent<NavMeshAgent>();
-                DOTween.To(() => agent.speed, (x) => agent.speed = x, maxSpeed, duration);
+                dotweenHandle = DOTween.To(() => agent.speed, (x) => agent.speed = x, maxSpeed, duration);
 
                 while (other != null)
                 {
@@ -31,6 +33,6 @@ public class MoveToPlayer : MonoBehaviour
     }
     void OnDestroy()
     {
-        DOTween.KillAll();
+        dotweenHandle.Kill();
     }
 }
