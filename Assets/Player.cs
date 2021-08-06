@@ -8,7 +8,8 @@ public partial class Player : Actor
 {
     CapsuleCollider capsuleCol;
     Transform bulletSpawnPosition;
-    [SerializeField] WeaponInfo currentWeapon;
+    [SerializeField] WeaponInfo mainWeapon;
+    [SerializeField] WeaponInfo subWeapon;
     [SerializeField] Transform rightWeaponPosition;
 
     [SerializeField] float speed = 5;
@@ -19,22 +20,8 @@ public partial class Player : Actor
         hp = 300;
 
         capsuleCol = GetComponent<CapsuleCollider>();
-        animator.runtimeAnimatorController = currentWeapon.overrideController;
-        var weaponInfo = Instantiate(currentWeapon, rightWeaponPosition);
-        weaponInfo.transform.localPosition = currentWeapon.gameObject.transform.localPosition;
-        weaponInfo.transform.localRotation = currentWeapon.gameObject.transform.localRotation;
-        weaponInfo.transform.localScale = currentWeapon.gameObject.transform.localScale;
-        currentWeapon = weaponInfo;
-        if (currentWeapon.attackCollider != null)
-            currentWeapon.attackCollider.enabled = false;
-
-        bullet = (GameObject)Resources.Load(bulletString);
-        //bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
-        //bulletLight = GetComponentInChildren<Light>(true).gameObject;
-        bulletSpawnPosition = currentWeapon.bulletSpawnPosition;
-        if (currentWeapon.bulletLight != null)
-            bulletLight = currentWeapon.bulletLight.gameObject;
-        shootDelay = currentWeapon.delay;
+        animator.runtimeAnimatorController = mainWeapon.overrideController;
+        ChangeWeapn(mainWeapon);
 
         var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var item in vcs)
@@ -179,6 +166,25 @@ public partial class Player : Actor
     #endregion TakeHit
 
     #region Methods
+    void ChangeWeapn(WeaponInfo currentWeapon)
+    {
+        var weaponInfo = Instantiate(currentWeapon, rightWeaponPosition);
+        weaponInfo.transform.localPosition = currentWeapon.gameObject.transform.localPosition;
+        weaponInfo.transform.localRotation = currentWeapon.gameObject.transform.localRotation;
+        weaponInfo.transform.localScale = currentWeapon.gameObject.transform.localScale;
+        currentWeapon = weaponInfo;
+        if (currentWeapon.attackCollider != null)
+            currentWeapon.attackCollider.enabled = false;
+
+        bullet = (GameObject)Resources.Load(bulletString);
+        //bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
+        //bulletLight = GetComponentInChildren<Light>(true).gameObject;
+        bulletSpawnPosition = currentWeapon.bulletSpawnPosition;
+        if (currentWeapon.bulletLight != null)
+            bulletLight = currentWeapon.bulletLight.gameObject;
+        shootDelay = currentWeapon.delay;
+    }
+
     float fastAimingDistance = 0.2f;
     float lookatRotationValue = 0.05f;
     void RotationSlerp(Vector3 dir)

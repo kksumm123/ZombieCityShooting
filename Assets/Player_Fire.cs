@@ -19,7 +19,7 @@ public partial class Player : Actor
                 isFiring = true;
                 animator.SetTrigger("FireStart");
                 shootDelayEndTime = Time.time + shootDelay;
-                switch (currentWeapon.type)
+                switch (mainWeapon.type)
                 {
                     case WeaponInfo.WeaponType.Gun:
                         IncreaseRecoil();
@@ -38,10 +38,10 @@ public partial class Player : Actor
 
     IEnumerator MeleeAttackCo()
     {
-        yield return new WaitForSeconds(currentWeapon.attackStartTime);
-        currentWeapon.attackCollider.enabled = true;
-        yield return new WaitForSeconds(currentWeapon.attackTime);
-        currentWeapon.attackCollider.enabled = false;
+        yield return new WaitForSeconds(mainWeapon.attackStartTime);
+        mainWeapon.attackCollider.enabled = true;
+        yield return new WaitForSeconds(mainWeapon.attackTime);
+        mainWeapon.attackCollider.enabled = false;
     }
 
     private void EndFiring()
@@ -85,6 +85,6 @@ public partial class Player : Actor
     public void OnZombieEnter(Collider other)
     {
         var zombie = other.GetComponent<Zombie>();
-        zombie.TakeHit(currentWeapon.power, transform, currentWeapon.knockBackForce);
+        zombie.TakeHit(mainWeapon.power, transform, mainWeapon.knockBackForce);
     }
 }
