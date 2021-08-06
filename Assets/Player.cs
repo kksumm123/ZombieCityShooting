@@ -88,8 +88,17 @@ public partial class Player : Actor
                 (isFiring == true ? shootingSpeed : speed)
                 * rollingSpeedMult * Time.deltaTime * move, Space.World);
             State = StateType.Run;
-            animator.SetFloat("DirX", transform.forward.x * move.x);
-            animator.SetFloat("DirY", transform.forward.z * move.z);
+
+            if (Mathf.RoundToInt(transform.forward.x) == 1 || Mathf.RoundToInt(transform.forward.x) == -1)
+            {
+                animator.SetFloat("DirX", transform.forward.z * move.z);
+                animator.SetFloat("DirY", transform.forward.x * move.x);
+            }
+            else
+            {
+                animator.SetFloat("DirX", transform.forward.x * move.x);
+                animator.SetFloat("DirY", transform.forward.z * move.z);
+            }
         }
         else
             State = StateType.Idle;
