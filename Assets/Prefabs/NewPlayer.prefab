@@ -1299,7 +1299,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 300
   damageColor: {r: 1, g: 0, b: 0, a: 1}
-  currentWeapon: {fileID: 5587687938452155612, guid: c99a721fa067cdf418e79f3589636395, type: 3}
+  mainWeapon: {fileID: 7119531273919437861, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}
+  subWeapon: {fileID: 5587687938452155612, guid: c99a721fa067cdf418e79f3589636395, type: 3}
+  currentWeapon: {fileID: 0}
   rightWeaponPosition: {fileID: 65558201362697500}
   speed: 5
   shootingSpeed: 2.5

@@ -10,6 +10,7 @@ public partial class Player : Actor
     Transform bulletSpawnPosition;
     [SerializeField] WeaponInfo mainWeapon;
     [SerializeField] WeaponInfo subWeapon;
+    [SerializeField] WeaponInfo currentWeapon;
     [SerializeField] Transform rightWeaponPosition;
 
     [SerializeField] float speed = 5;
@@ -20,8 +21,7 @@ public partial class Player : Actor
         hp = 300;
 
         capsuleCol = GetComponent<CapsuleCollider>();
-        animator.runtimeAnimatorController = mainWeapon.overrideController;
-        ChangeWeapn(mainWeapon);
+        ChangeWeapon(mainWeapon);
 
         var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var item in vcs)
@@ -41,9 +41,14 @@ public partial class Player : Actor
                 Move();
                 Fire();
                 Roll();
+
+                if (Input.GetKeyDown(KeyCode.Tab))
+                    ToggleChangeWeapon();
             }
         }
     }
+
+
 
     Plane plane = new Plane(new Vector3(0, 1, 0), 0);
     void LookAtMouse()
@@ -166,13 +171,26 @@ public partial class Player : Actor
     #endregion TakeHit
 
     #region Methods
-    void ChangeWeapn(WeaponInfo currentWeapon)
+    bool toggleWeapon = false;
+    void ToggleChangeWeapon()
     {
-        var weaponInfo = Instantiate(currentWeapon, rightWeaponPosition);
-        weaponInfo.transform.localPosition = currentWeapon.gameObject.transform.localPosition;
-        weaponInfo.transform.localRotation = currentWeapon.gameObject.transform.localRotation;
-        weaponInfo.transform.localScale = currentWeapon.gameObject.transform.localScale;
+        ChangeWeapon((toggleWeapon == true ? mainWeapon : subWeapon));
+        toggleWeapon = !toggleWeapon;
+    }
+    GameObject currentWeaponGo;
+    void ChangeWeapon(WeaponInfo newWeapon)
+    {
+        Destroy(currentWeaponGo);
+
+        var weaponInfo = Instantiate(newWeapon, rightWeaponPosition);
+        weaponInfo.transform.localPosition = newWeapon.gameObject.transform.localPosition;
+        weaponInfo.transform.localRotation = newWeapon.gameObject.transform.localRotation;
+        weaponInfo.transform.localScale = newWeapon.gameObject.transform.localScale;
         currentWeapon = weaponInfo;
+
+        animator.runtimeAnimatorController = currentWeapon.overrideController;
+        currentWeaponGo = currentWeapon.gameObject;
+
         if (currentWeapon.attackCollider != null)
             currentWeapon.attackCollider.enabled = false;
 
