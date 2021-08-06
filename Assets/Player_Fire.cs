@@ -17,7 +17,7 @@ public partial class Player : Actor
             if (shootDelayEndTime < Time.time)
             {
                 isFiring = true;
-                animator.SetBool("Fire", true);
+                animator.SetTrigger("FireStart");
                 shootDelayEndTime = Time.time + shootDelay;
                 switch (currentWeapon.type)
                 {
@@ -47,7 +47,6 @@ public partial class Player : Actor
     private void EndFiring()
     {
         isFiring = false;
-        animator.SetBool("Fire", false);
         DecreaseRecoil();
     }
 
