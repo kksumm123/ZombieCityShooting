@@ -19,14 +19,18 @@ public partial class Player : Actor
         hp = 300;
 
         capsuleCol = GetComponent<CapsuleCollider>();
-        bullet = (GameObject)Resources.Load(bulletString);
-        bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
-        bulletLight = GetComponentInChildren<Light>(true).gameObject;
-        var newWeaponGo = Instantiate(currentWeapon.weaponGo, rightWeaponPosition);
-        newWeaponGo.transform.localPosition = currentWeapon.weaponGo.transform.localPosition;
-        newWeaponGo.transform.localRotation = currentWeapon.weaponGo.transform.localRotation;
-        newWeaponGo.transform.localScale = currentWeapon.weaponGo.transform.localScale;
         animator.runtimeAnimatorController = currentWeapon.overrideController;
+        var weaponInfo = Instantiate(currentWeapon, rightWeaponPosition);
+        weaponInfo.transform.localPosition = currentWeapon.gameObject.transform.localPosition;
+        weaponInfo.transform.localRotation = currentWeapon.gameObject.transform.localRotation;
+        weaponInfo.transform.localScale = currentWeapon.gameObject.transform.localScale;
+
+        bullet = (GameObject)Resources.Load(bulletString);
+        //bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
+        //bulletLight = GetComponentInChildren<Light>(true).gameObject;
+        bulletSpawnPosition = weaponInfo.bulletSpawnPosition;
+        bulletLight = weaponInfo.bulletLight.gameObject;
+
         var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var item in vcs)
         {
