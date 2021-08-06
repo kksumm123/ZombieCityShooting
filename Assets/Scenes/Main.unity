@@ -7289,7 +7289,7 @@ Light:
   m_InnerSpotAngle: 6
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -9523,7 +9523,7 @@ Light:
   m_InnerSpotAngle: 6
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -10778,22 +10778,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 964364479665020217, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 119
+      objectReference: {fileID: 0}
     - target: {fileID: 7982174732958607612, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7982174732958607614, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
-      propertyPath: subWeapon
-      value: 
-      objectReference: {fileID: 5587687938452155612, guid: c99a721fa067cdf418e79f3589636395, type: 3}
-    - target: {fileID: 7982174732958607614, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
-      propertyPath: mainWeapon
-      value: 
-      objectReference: {fileID: 7119531273919437861, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}
-    - target: {fileID: 7982174732958607614, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
-      propertyPath: currentWeapon
-      value: 
-      objectReference: {fileID: 7119531273919437861, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}
     - target: {fileID: 7982174732958607615, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
       propertyPath: m_RootOrder
       value: 11

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1192544337}
   - component: {fileID: 1192544338}
   - component: {fileID: 6449544559488646619}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 2955756888100084195}
   - component: {fileID: 2955756888100084193}
   - component: {fileID: 2955756888100084192}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Baseballbat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,9 +149,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3331954481448985736}
   - component: {fileID: 5587687938452155612}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bat
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -196,4 +196,4 @@ MonoBehaviour:
   attackStartTime: 0.4
   attackTime: 0.1
   attackCollider: {fileID: 1192544338}
-  knockBackForce: 0
+  knockBackForce: 1

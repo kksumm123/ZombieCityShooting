@@ -105,9 +105,9 @@ GameObject:
   - component: {fileID: 526795426065672976}
   - component: {fileID: 2354110401272160218}
   - component: {fileID: 7119531273919437861}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rifle
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

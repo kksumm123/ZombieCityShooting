@@ -10,9 +10,14 @@ public partial class Player : Actor
     float shootDelayEndTime;
     bool isFiring = false;
     [SerializeField] float shootDelay = 0.05f;
+
+    [SerializeField] int bulletCountInClip; //탄창 현재 총알 수
+    [SerializeField] int MaxBulletCountInClip; //탄창 최대 총알 수
+    [SerializeField] int allBulletCount; // 소유한 전체 총알 수
+    [SerializeField] int reloadTime; // 재장전시간
     void Fire()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && bulletCountInClip > 0)
         {
             if (shootDelayEndTime < Time.time)
             {
@@ -22,6 +27,7 @@ public partial class Player : Actor
                 switch (currentWeapon.type)
                 {
                     case WeaponInfo.WeaponType.Gun:
+                        bulletCountInClip--;
                         IncreaseRecoil();
                         currentWeapon.StartCoroutine(InstantiateBilletAndFlashBulletCo());
                         break;
@@ -51,7 +57,7 @@ public partial class Player : Actor
     }
 
     GameObject bulletLight;
-    public float bulletFlashTime = 0.001f;
+    public float bulletFlashTime = 0.05f;
     private IEnumerator InstantiateBilletAndFlashBulletCo()
     {
         yield return null;

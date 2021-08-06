@@ -41,14 +41,31 @@ public partial class Player : Actor
                 Move();
                 Fire();
                 Roll();
-
+                ReloadBullet();
                 if (Input.GetKeyDown(KeyCode.Tab))
                     ToggleChangeWeapon();
             }
         }
     }
 
+    void ReloadBullet()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(ReloadBulletCo());
+        }
+    }
 
+    IEnumerator ReloadBulletCo()
+    {
+        State = StateType.Reload;
+        animator.SetTrigger("Reload");
+        yield return new WaitForSeconds(reloadTime);
+        State = StateType.Idle;
+        int reloadCount = Mathf.Min(allBulletCount, MaxBulletCountInClip);
+        allBulletCount -= reloadCount;
+        bulletCountInClip = reloadCount;
+    }
 
     Plane plane = new Plane(new Vector3(0, 1, 0), 0);
     void LookAtMouse()
@@ -238,6 +255,7 @@ public partial class Player : Actor
         Hit,
         Die,
         Roll,
+        Reload,
     }
     #endregion State
 }
