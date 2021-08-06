@@ -52,14 +52,7 @@ public class LightManager : MonoBehaviour
     [SerializeField] float changeDuration = 3;
     void ChangeDayLight()
     {
-        if (allLightMap == null)
-        {
-            var _allLights = FindObjectsOfType<Light>();
-            foreach (var item in _allLights)
-            {
-                allLightMap[item] = item.intensity;
-            }
-        }
+        InitAllLightMap();
 
         // 밤에서 낮으로 변함 -> 디렉셔널 라이트 점점 밝게, 다른 라이트는 점점 어둡게
         foreach (var item in allLightMap)
@@ -76,14 +69,7 @@ public class LightManager : MonoBehaviour
 
     void ChangeNightLight()
     {
-        if (allLightMap == null)
-        {
-            var _allLights = FindObjectsOfType<Light>();
-            foreach (var item in _allLights)
-            {
-                allLightMap[item] = item.intensity;
-            }
-        }
+        InitAllLightMap();
 
         // 낮에서 밤으로 변함 -> 디렉셔널 라이트 점점 어둡, 다른 라이트는 점점 밝게
         foreach (var item in allLightMap)
@@ -95,6 +81,18 @@ public class LightManager : MonoBehaviour
             else
                 DOTween.To(() => 0, (x) => item.Key.intensity = x, item.Value, changeDuration)
                        .SetLink(gameObject);
+        }
+    }
+    void InitAllLightMap()
+    {
+        if (allLightMap == null)
+        {
+            allLightMap = new Dictionary<Light, float>();
+            var _allLights = FindObjectsOfType<Light>();
+            foreach (var item in _allLights)
+            {
+                allLightMap[item] = item.intensity;
+            }
         }
     }
 }
