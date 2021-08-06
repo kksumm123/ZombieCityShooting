@@ -88,13 +88,13 @@ public partial class Player : Actor
                 (isFiring == true ? shootingSpeed : speed)
                 * rollingSpeedMult * Time.deltaTime * move, Space.World);
             State = StateType.Run;
+            animator.SetFloat("DirX", transform.forward.x * move.x);
+            animator.SetFloat("DirY", transform.forward.z * move.z);
         }
         else
             State = StateType.Idle;
 
-        animator.SetFloat("DirX", transform.forward.x);
-        animator.SetFloat("DirY", transform.forward.z);
-        animator.SetFloat("Speed", transform.forward.sqrMagnitude);
+        animator.SetFloat("Speed", move.sqrMagnitude);
     }
     #endregion Move
 

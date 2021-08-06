@@ -12,7 +12,6 @@ public class MoveToPlayer : MonoBehaviour
     [SerializeField] float maxSpeed = 20;
     [SerializeField] float duration = 3;
     bool isAttached = false;
-    TweenerCore<float, float, FloatOptions> dotweenHandle;
     IEnumerator OnTriggerEnter(Collider other)
     {
         if (isAttached == false)
@@ -21,7 +20,8 @@ public class MoveToPlayer : MonoBehaviour
             {
                 isAttached = true;
                 agent = GetComponent<NavMeshAgent>();
-                dotweenHandle = DOTween.To(() => agent.speed, (x) => agent.speed = x, maxSpeed, duration);
+                DOTween.To(() => agent.speed, (x) => agent.speed = x, maxSpeed, duration)
+                       .SetLink(gameObject);// 기본적으로 OnDestroy에 같이 부서짐
 
                 while (other != null)
                 {
@@ -30,10 +30,5 @@ public class MoveToPlayer : MonoBehaviour
                 }
             }
         }
-    }
-    void OnDestroy()
-    {
-        StopAllCoroutines();
-        dotweenHandle.Kill();
     }
 }

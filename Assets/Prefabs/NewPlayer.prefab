@@ -979,7 +979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 300
   damageColor: {r: 1, g: 1, b: 1, a: 1}
-  currentWeapon: {fileID: 11400000, guid: f558dd99ad292d64cb3db5c425cdecbf, type: 2}
+  currentWeapon: {fileID: 11400000, guid: 360798a7e23923d4c9de5db4e495fca0, type: 2}
   rightWeaponPosition: {fileID: 975861325651671936}
   speed: 5
   shootingSpeed: 2.5
@@ -1557,6 +1557,10 @@ PrefabInstance:
     - target: {fileID: 8467637446516301523, guid: 1a6cb6b54d0a9414ca4ea6100771a429, type: 3}
       propertyPath: m_Name
       value: Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467637446516301523, guid: 1a6cb6b54d0a9414ca4ea6100771a429, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9135771508022838377, guid: 1a6cb6b54d0a9414ca4ea6100771a429, type: 3}
       propertyPath: m_RootOrder
