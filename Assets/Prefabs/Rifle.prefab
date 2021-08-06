@@ -189,13 +189,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37f24d80f64c8544a243297154a2978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   overrideController: {fileID: 22100000, guid: ae2f0be4f37f5c44cb31356c3cd5407f, type: 2}
-  damage: 20
-  delay: 0.2
+  power: 20
+  randomPower: 4
+  delay: 0.05
   maxBulletCount: 0
   bullet: {fileID: 3177356632863467888, guid: eee5a96b8493ddb4e8d13fffa8f4ce00, type: 3}
   bulletSpawnPosition: {fileID: 3032270841497689112}
   bulletLight: {fileID: 1258169713328073097}
+  attackStartTime: 0.2
+  attackTime: 0.4
+  attackCollider: {fileID: 0}
+  knockBackForce: 1
 --- !u!1 &6306004262192661844
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,8 @@ public partial class Player : Actor
         weaponInfo.transform.localRotation = currentWeapon.gameObject.transform.localRotation;
         weaponInfo.transform.localScale = currentWeapon.gameObject.transform.localScale;
         currentWeapon = weaponInfo;
-        currentWeapon.attackCollider.enabled = false;
+        if (currentWeapon.attackCollider != null)
+            currentWeapon.attackCollider.enabled = false;
 
         bullet = (GameObject)Resources.Load(bulletString);
         //bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
