@@ -29,7 +29,7 @@ public partial class Player : Actor
         //bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
         //bulletLight = GetComponentInChildren<Light>(true).gameObject;
         bulletSpawnPosition = weaponInfo.bulletSpawnPosition;
-        bulletLight = weaponInfo.bulletLight.gameObject;
+        bulletLight = weaponInfo.bulletLight?.gameObject;
 
         var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var item in vcs)
