@@ -161,15 +161,15 @@ public class Zombie : Actor
     #endregion ChaseFSM
 
     #region TakeHit
-    public void TakeHit(int damage, Transform bulletTr)
+    public void TakeHit(int damage, Transform attackerTr, float knockBackForce)
     {
         if (hp > 0)
         {
             base.TakeHit(damage);
             // 뒤로 밀려나게
-            KnockBackMove(bulletTr.forward);
+            KnockBackMove(attackerTr.forward, knockBackForce);
             // 피격 이펙트 생성(피)
-            CreateBloodEffect(bulletTr.position);
+            CreateBloodEffect(attackerTr.position);
 
             CurrentFSM = TakeHitFSM;
         }
@@ -208,14 +208,14 @@ public class Zombie : Actor
     #region Methods
 
     [SerializeField] float knockBackNoise = 0.1f;
-    [SerializeField] float knockBackDistance = 0.1f;
-    void KnockBackMove(Vector3 toKnockBackDirection)
+    //[SerializeField] float knockBackDistance = 0.1f;
+    void KnockBackMove(Vector3 toKnockBackDirection, float knockBackForce)
     {
         toKnockBackDirection.x += Random.Range(-knockBackNoise, knockBackNoise);
         toKnockBackDirection.z += Random.Range(-knockBackNoise, knockBackNoise);
         toKnockBackDirection.y = 0;
         toKnockBackDirection.Normalize();
-        transform.Translate(toKnockBackDirection * knockBackDistance, Space.World);
+        transform.Translate(toKnockBackDirection * knockBackForce, Space.World);
     }
 
     private void StopCo(Coroutine handle)

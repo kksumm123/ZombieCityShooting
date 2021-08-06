@@ -86,6 +86,6 @@ public partial class Player : Actor
     public void OnZombieEnter(Collider other)
     {
         var zombie = other.GetComponent<Zombie>();
-        zombie.TakeHit(currentWeapon.power, transform);
+        zombie.TakeHit(currentWeapon.power, transform, currentWeapon.knockBackForce);
     }
 }

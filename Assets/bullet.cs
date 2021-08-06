@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] int randomPower = 4;
     [SerializeField] float speed = 20;
     [SerializeField] float destroyTime = 1;
+    [SerializeField] float knockBackForce = 0.1f;
     void Start()
     {
         Destroy(gameObject, destroyTime);
@@ -25,7 +26,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Zombie"))
         {
             var zombie = other.GetComponent<Zombie>();
-            zombie.TakeHit(power, transform);
+            zombie.TakeHit(power, transform, knockBackForce);
             Destroy(gameObject);
         }
     }

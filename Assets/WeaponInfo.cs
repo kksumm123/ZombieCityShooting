@@ -28,9 +28,10 @@ public class WeaponInfo : MonoBehaviour
     public Light bulletLight;
 
     [Header("근접공격")]
-    public float attackStartTime = 0.2f;
-    public float attackTime = 0.4f;
+    public float attackStartTime = 0.4f;
+    public float attackTime = 0.1f;
     public Collider attackCollider;
+    public float knockBackForce = 1;
 
     private void Start()
     {
