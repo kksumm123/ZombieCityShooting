@@ -14,7 +14,7 @@ public partial class Player : Actor
     [SerializeField] int bulletCountInClip; //탄창 현재 총알 수
     [SerializeField] int MaxBulletCountInClip; //탄창 최대 총알 수
     [SerializeField] int allBulletCount; // 소유한 전체 총알 수
-    [SerializeField] int reloadTime; // 재장전시간
+    [SerializeField] float reloadTime; // 재장전시간
     void Fire()
     {
         if (Input.GetMouseButton(0) && bulletCountInClip > 0)
@@ -57,7 +57,7 @@ public partial class Player : Actor
     }
 
     GameObject bulletLight;
-    public float bulletFlashTime = 0.05f;
+    public float bulletFlashTime = 0.03f;
     private IEnumerator InstantiateBilletAndFlashBulletCo()
     {
         yield return null;
