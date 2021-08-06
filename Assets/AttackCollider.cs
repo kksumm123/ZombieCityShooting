@@ -8,7 +8,7 @@ public class AttackCollider : MonoBehaviour
     {
         if (other.CompareTag("Zombie") == false)
             return;
-
+        
         GetComponentInParent<Player>().OnZombieEnter(other);
     }
 }

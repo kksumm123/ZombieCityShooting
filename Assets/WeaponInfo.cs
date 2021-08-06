@@ -29,7 +29,7 @@ public class WeaponInfo : MonoBehaviour
 
     [Header("근접공격")]
     public float attackStartTime = 0.1f;
-    public float attackTime = 0.4f;
+    public float attackTime = 0.8f;
     public Collider attackCollider;
 
     private void Start()

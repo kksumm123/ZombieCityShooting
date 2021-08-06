@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1192544337}
   - component: {fileID: 1192544338}
+  - component: {fileID: 6449544559488646619}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
@@ -45,6 +46,18 @@ CapsuleCollider:
   m_Height: 1.26
   m_Direction: 0
   m_Center: {x: -0.28, y: 0, z: 0}
+--- !u!114 &6449544559488646619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192544336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1729452108c99114c9787ee0679ebe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2955756888100084194
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,9 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37f24d80f64c8544a243297154a2978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   overrideController: {fileID: 22100000, guid: 5c27d6ee385d626468d48d0de8aa6837, type: 2}
-  damage: 20
+  power: 20
+  randomPower: 4
   delay: 0.2
   maxBulletCount: 0
   bullet: {fileID: 0}

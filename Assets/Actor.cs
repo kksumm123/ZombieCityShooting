@@ -33,7 +33,9 @@ public class Actor : MonoBehaviour
         var newGo = Instantiate(textEffectGo, position + randomPos, Camera.main.transform.rotation);
         var textMeshPro = newGo.GetComponent<TextMeshPro>();
         textMeshPro.text = value.ToNumber();
-        textMeshPro.color = color;
+        var colorGradient = textMeshPro.colorGradient;
+        colorGradient.bottomLeft = color;
+        textMeshPro.colorGradient = colorGradient;
         Destroy(newGo, 1.5f);
     }
 }

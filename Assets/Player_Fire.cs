@@ -87,6 +87,5 @@ public partial class Player : Actor
     {
         var zombie = other.GetComponent<Zombie>();
         zombie.TakeHit(currentWeapon.power, transform);
-        Destroy(gameObject);
     }
 }
