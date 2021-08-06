@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        if (other.CompareTag("Zombie") == false)
+            return;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponentInParent<Player>().OnZombieEnter(other);
     }
 }

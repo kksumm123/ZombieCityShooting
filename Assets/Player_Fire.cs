@@ -9,6 +9,7 @@ public partial class Player : Actor
 
     float shootDelayEndTime;
     bool isFiring = false;
+    [SerializeField] float shootDelay = 0.05f;
     void Fire()
     {
         if (Input.GetMouseButton(0))
@@ -82,5 +83,10 @@ public partial class Player : Actor
         return Quaternion.Euler(rotation.eulerAngles + recoil);
     }
 
-    [SerializeField] float shootDelay = 0.05f;
+    public void OnZombieEnter(Collider other)
+    {
+        var zombie = other.GetComponent<Zombie>();
+        zombie.TakeHit(currentWeapon.power, transform);
+        Destroy(gameObject);
+    }
 }

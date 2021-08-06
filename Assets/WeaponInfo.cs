@@ -17,7 +17,8 @@ public class WeaponInfo : MonoBehaviour
     public WeaponType type;
     public AnimatorOverrideController overrideController;
 
-    public int damage = 20;
+    public int power = 20;
+    [SerializeField] int randomPower = 4;
     public float delay = 0.2f;
 
     [Header("รั")]
@@ -30,4 +31,9 @@ public class WeaponInfo : MonoBehaviour
     public float attackStartTime = 0.1f;
     public float attackTime = 0.4f;
     public Collider attackCollider;
+
+    private void Start()
+    {
+        power += Random.Range(-randomPower, randomPower);
+    }
 }
