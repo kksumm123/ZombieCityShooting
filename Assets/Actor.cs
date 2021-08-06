@@ -21,7 +21,7 @@ public class Actor : MonoBehaviour
     {
         Instantiate(bloodParticle, hitPoint, Quaternion.identity);
     }
-    public Color damageColor = Color.white;
+    public Color damageColor = Color.red;
     protected void TakeHit(int damage)
     {
         hp -= damage;

@@ -193,6 +193,6 @@ MonoBehaviour:
   bullet: {fileID: 0}
   bulletSpawnPosition: {fileID: 0}
   bulletLight: {fileID: 0}
-  attackStartTime: 0.1
+  attackStartTime: 0.2
   attackTime: 0.4
   attackCollider: {fileID: 1192544338}
