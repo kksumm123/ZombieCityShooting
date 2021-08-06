@@ -1287,7 +1287,7 @@ GameObject:
   - component: {fileID: 7420772742695270119}
   - component: {fileID: 3466590470673362077}
   m_Layer: 0
-  m_Name: Sprite
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
