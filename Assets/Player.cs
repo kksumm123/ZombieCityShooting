@@ -30,9 +30,10 @@ public partial class Player : Actor
         bullet = (GameObject)Resources.Load(bulletString);
         //bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
         //bulletLight = GetComponentInChildren<Light>(true).gameObject;
-        bulletSpawnPosition = weaponInfo.bulletSpawnPosition;
-        if (weaponInfo.bulletLight != null)
-            bulletLight = weaponInfo.bulletLight.gameObject;
+        bulletSpawnPosition = currentWeapon.bulletSpawnPosition;
+        if (currentWeapon.bulletLight != null)
+            bulletLight = currentWeapon.bulletLight.gameObject;
+        shootDelay = currentWeapon.delay;
 
         var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var item in vcs)

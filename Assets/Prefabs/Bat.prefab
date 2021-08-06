@@ -188,7 +188,7 @@ MonoBehaviour:
   overrideController: {fileID: 22100000, guid: 5c27d6ee385d626468d48d0de8aa6837, type: 2}
   power: 20
   randomPower: 4
-  delay: 0.2
+  delay: 1
   maxBulletCount: 0
   bullet: {fileID: 0}
   bulletSpawnPosition: {fileID: 0}
