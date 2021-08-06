@@ -82,6 +82,8 @@ public class LightManager : MonoBehaviour
                 DOTween.To(() => 0, (x) => item.Key.intensity = x, item.Value, changeDuration)
                        .SetLink(gameObject);
         }
+        DOTween.To(() => Camera.main.backgroundColor, (x) => Camera.main.backgroundColor = x, dayColor, changeDuration)
+               .SetLink(gameObject);
     }
     void InitAllLightMap()
     {
@@ -94,5 +96,7 @@ public class LightManager : MonoBehaviour
                 allLightMap[item] = item.intensity;
             }
         }
+        DOTween.To(() => Camera.main.backgroundColor, (x) => Camera.main.backgroundColor = x, nightColor, changeDuration)
+               .SetLink(gameObject);
     }
 }
