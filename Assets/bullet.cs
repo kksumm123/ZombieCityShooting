@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] int randomPower = 4;
     [SerializeField] float speed = 20;
     [SerializeField] float destroyTime = 1;
-    [SerializeField] float knockBackForce = 0.1f;
+    public float knockBackForce = 0.1f;
     void Start()
     {
         Destroy(gameObject, destroyTime);

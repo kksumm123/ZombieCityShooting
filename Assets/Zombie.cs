@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -208,14 +209,18 @@ public class Zombie : Actor
     #region Methods
 
     [SerializeField] float knockBackNoise = 0.1f;
-    //[SerializeField] float knockBackDistance = 0.1f;
-    void KnockBackMove(Vector3 toKnockBackDirection, float knockBackForce)
+    [SerializeField] float knockBackForce = 0.5f;
+    [SerializeField] float knockBackDuration = 0.5f;
+    [SerializeField] Ease knockBackEase = Ease.OutExpo;
+    void KnockBackMove(Vector3 toKnockBackDirection, float _knockBackForce)
     {
         toKnockBackDirection.x += Random.Range(-knockBackNoise, knockBackNoise);
         toKnockBackDirection.z += Random.Range(-knockBackNoise, knockBackNoise);
         toKnockBackDirection.y = 0;
         toKnockBackDirection.Normalize();
-        transform.Translate(toKnockBackDirection * knockBackForce, Space.World);
+        transform.Translate(toKnockBackDirection * knockBackForce * _knockBackForce, Space.World);
+        transform.DOMove(transform.position + toKnockBackDirection * knockBackForce * _knockBackForce, knockBackDuration)
+                 .SetEase(knockBackEase);
     }
 
     private void StopCo(Coroutine handle)

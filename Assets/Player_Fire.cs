@@ -73,7 +73,8 @@ public partial class Player : Actor
     private IEnumerator InstantiateBilletAndFlashBulletCo()
     {
         yield return null;
-        Instantiate(Bullet, BulletSpawnPosition.position, CalculateRecoil(transform.rotation));
+        var bulletGo = Instantiate(Bullet, BulletSpawnPosition.position, CalculateRecoil(transform.rotation));
+        bulletGo.GetComponent<Bullet>().knockBackForce = currentWeapon.knockBackForce;
 
         bulletLight.SetActive(true);
         yield return new WaitForSeconds(bulletFlashTime);
