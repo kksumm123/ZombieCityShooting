@@ -9,6 +9,11 @@ public class Actor : MonoBehaviour
     static GameObject textEffectGo;
 
     [SerializeField] protected int hp = 100;
+    protected int maxHp;
+    protected void Awake()
+    {
+        maxHp = hp;
+    }
     protected void Start()
     {
         animator = GetComponentInChildren<Animator>();

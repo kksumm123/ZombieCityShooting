@@ -15,10 +15,16 @@ public partial class Player : Actor
 
     [SerializeField] float speed = 5;
     [SerializeField] float shootingSpeed = 2.5f;
+    new protected void Awake()
+    {
+        base.Awake();
+
+    }
     new void Start()
     {
         base.Start();
         hp = 300;
+        HealthUI.Instance.SetHP(hp, maxHp);
 
         capsuleCol = GetComponent<CapsuleCollider>();
         ChangeWeapon(mainWeapon);
@@ -169,6 +175,7 @@ public partial class Player : Actor
         if (hp > 0)
         {
             base.TakeHit(damage);
+            HealthUI.Instance.SetHP(hp, maxHp);
             CreateBloodEffect(capsuleCol.transform.position);
             animator.SetTrigger("TakeHit");
 
