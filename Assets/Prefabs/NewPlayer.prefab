@@ -143,7 +143,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1342,6 +1342,11 @@ MonoBehaviour:
   diePreDelayTime: 1
   m_state: 0
   shootDelay: 0.05
+  bulletCountInClip: 2
+  MaxBulletCountInClip: 6
+  allBulletCount: 500
+  maxBulletCount: 500
+  reloadTime: 0
   bulletFlashTime: 0.001
 --- !u!195 &5739982603234904425
 NavMeshAgent:

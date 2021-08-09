@@ -25,6 +25,7 @@ public partial class Player : Actor
         base.Start();
         hp = 300;
         HealthUI.Instance.SetGauge(hp, maxHp);
+        AmmoUI.Instance.SetBulletCount(bulletCountInClip, MaxBulletCountInClip, bulletCountInClip + allBulletCount, maxBulletCount);
 
         capsuleCol = GetComponent<CapsuleCollider>();
         ChangeWeapon(mainWeapon);
