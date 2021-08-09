@@ -145,8 +145,6 @@ public partial class Player : Actor
     [SerializeField] float rollingSpeedUserMult = 1;
     IEnumerator RollCo()
     {
-        animator.SetBool("Fire", false);
-
         // 구르는 애니메이션 실행
         State = StateType.Roll;
         animator.SetTrigger("Roll");
