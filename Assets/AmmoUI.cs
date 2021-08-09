@@ -10,4 +10,9 @@ public class AmmoUI : GaugeUI<AmmoUI>
         SetGauge(bulletCountInClip, maxBulletCountInClip);
         valueText.text = $"{allBuletCount} / {maxBulletCount}";
     }
+    internal void StartReload(int bulletCountInClip, int maxBulletCountInClip, int allBuletCount, int maxBulletCount, float duration)
+    {
+        StartCoroutine(SetAnimateGaugeCo(bulletCountInClip, maxBulletCountInClip, duration));
+        valueText.text = $"{allBuletCount} / {maxBulletCount}";
+    }
 }

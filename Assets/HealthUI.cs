@@ -34,4 +34,27 @@ public class GaugeUI<T> : SingletonMonoBehavior<T> where T : SingletonBase
                 images[i].sprite = disable;
         }
     }
+
+    protected IEnumerator SetAnimateGaugeCo(int value, int maxValue, float duration)
+    {
+        foreach (var item in images)
+            item.sprite = disable;
+
+        float timePerEach = duration / images.Length;
+
+        float percent = (float)value / maxValue;
+        int currentCount = Mathf.RoundToInt(percent * images.Length);
+
+        for (int i = 0; i < images.Length; i++)
+        {
+            if (i == currentCount - 1)
+                images[i].sprite = current;
+            else if (i < currentCount - 1)
+                images[i].sprite = enable;
+            else
+                images[i].sprite = disable;
+            yield return new WaitForSeconds(timePerEach);
+        }
+
+    }
 }
