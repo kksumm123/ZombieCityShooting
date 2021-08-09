@@ -196,13 +196,25 @@ public class Zombie : Actor
 
         CurrentFSM = ChaseFSM;
     }
-    [SerializeField] float destroyTime = 2;
+    [SerializeField] Material dieMaterial;
+    [SerializeField] float dieMaterialDuration = 2;
     void Die()
     {
         isLive = false;
         StageManager.Instance.AddScore(rewardScore);
+
         animator.Play("Die");
-        Destroy(gameObject, destroyTime);
+        // 매테리얼 교체
+        var renderers = GetComponentsInChildren<Renderer>(true);
+        foreach (var item in renderers)
+        {
+            item.sharedMaterial = dieMaterial;
+        }
+        //dieMaterial.SetFloat("_Progress", 1);
+        // 교체되는 동안 보여주고 파괴
+        DOTween.To(() => 1f, (x) => dieMaterial.SetFloat("_Progress", x), 0.2f, dieMaterialDuration)
+               .OnComplete(() => Destroy(gameObject));
+
     }
     #endregion TakeHit
 
