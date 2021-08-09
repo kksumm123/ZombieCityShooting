@@ -14,6 +14,7 @@ public partial class Player : Actor
     [SerializeField] int bulletCountInClip; //탄창 현재 총알 수
     [SerializeField] int MaxBulletCountInClip; //탄창 최대 총알 수
     [SerializeField] int allBulletCount; // 소유한 전체 총알 수
+    [SerializeField] int maxBulletCount; // 소유가능한 최대 총알 수
     [SerializeField] float reloadTime; // 재장전시간
     void Fire()
     {
@@ -29,6 +30,7 @@ public partial class Player : Actor
                     case WeaponInfo.WeaponType.Gun:
                         bulletCountInClip--;
                         IncreaseRecoil();
+                        AmmoUI.Instance.SetBulletCount(bulletCountInClip, MaxBulletCountInClip, bulletCountInClip + allBulletCount, maxBulletCount)
                         currentWeapon.StartCoroutine(InstantiateBilletAndFlashBulletCo());
                         break;
                     case WeaponInfo.WeaponType.Melee:

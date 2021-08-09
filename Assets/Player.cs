@@ -24,7 +24,7 @@ public partial class Player : Actor
     {
         base.Start();
         hp = 300;
-        HealthUI.Instance.SetHP(hp, maxHp);
+        HealthUI.Instance.SetGauge(hp, maxHp);
 
         capsuleCol = GetComponent<CapsuleCollider>();
         ChangeWeapon(mainWeapon);
@@ -175,7 +175,7 @@ public partial class Player : Actor
         if (hp > 0)
         {
             base.TakeHit(damage);
-            HealthUI.Instance.SetHP(hp, maxHp);
+            HealthUI.Instance.SetGauge(hp, maxHp);
             CreateBloodEffect(capsuleCol.transform.position);
             animator.SetTrigger("TakeHit");
 

@@ -1,18 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoUI : MonoBehaviour
+public class AmmoUI : GaugeUI<AmmoUI>
 {
-    // Start is called before the first frame update
-    void Start()
+    internal void SetBulletCount(int bulletCountInClip, int maxBulletCountInClip, int allBuletCount, int maxBulletCount)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SetGauge(bulletCountInClip, maxBulletCountInClip);
+        valueText.text = $"{allBuletCount} / {maxBulletCount}";
     }
 }

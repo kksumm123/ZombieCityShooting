@@ -5,9 +5,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthUI : SingletonMonoBehavior<HealthUI>
+public class HealthUI : GaugeUI<HealthUI>
 {
-    TextMeshProUGUI valueText;
+
+}
+public class GaugeUI<T> : SingletonMonoBehavior<T> where T : SingletonBase
+{
+    protected TextMeshProUGUI valueText;
     public Image[] images;
     public Sprite enable, current, disable;
     protected override void OnInit()
@@ -15,10 +19,10 @@ public class HealthUI : SingletonMonoBehavior<HealthUI>
         valueText = transform.Find("ValueText").GetComponent<TextMeshProUGUI>();
     }
 
-    internal void SetHP(int hp, int maxHp)
+    internal void SetGauge(int value, int maxValue)
     {
-        valueText.text = $"{hp} / {maxHp}";
-        float percent = (float)hp / maxHp;
+        valueText.text = $"{value} / {maxValue}";
+        float percent = (float)value / maxValue;
         int currentCount = Mathf.RoundToInt(percent * images.Length);
         for (int i = 0; i < images.Length; i++)
         {
