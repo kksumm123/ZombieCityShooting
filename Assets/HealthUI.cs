@@ -8,7 +8,7 @@ public class HealthUI : SingletonMonoBehavior<HealthUI>
 {
     TextMeshProUGUI valueText;
     public Image[] images;
-    public Image enable, current, disable;
+    public Sprite enable, current, disable;
     protected override void OnInit()
     {
         valueText = transform.Find("ValueText").GetComponent<TextMeshProUGUI>();

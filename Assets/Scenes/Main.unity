@@ -1231,10 +1231,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completeUiInite: 0
-  images: []
-  enable: {fileID: 0}
-  current: {fileID: 0}
-  disable: {fileID: 0}
+  images:
+  - {fileID: 1811422268}
+  - {fileID: 421422934}
+  - {fileID: 911943414}
+  - {fileID: 1843040795}
+  - {fileID: 847162770}
+  - {fileID: 1928062158}
+  - {fileID: 854296191}
+  - {fileID: 2125180161}
+  - {fileID: 1315722150}
+  - {fileID: 847866099}
+  enable: {fileID: 21300000, guid: bb7d7d4b9ae0e704ca5e4b07aba85a79, type: 3}
+  current: {fileID: 21300000, guid: 321fa6b1c4e6c9c4aa81791e78e0c0e7, type: 3}
+  disable: {fileID: 21300000, guid: 9ef9e4f83de74894aa5f5372553c1216, type: 3}
 --- !u!1 &157282084
 GameObject:
   m_ObjectHideFlags: 0
