@@ -194,7 +194,11 @@ MonoBehaviour:
   power: 20
   randomPower: 4
   delay: 0.05
-  maxBulletCount: 0
+  bulletCountInClip: 30
+  maxBulletCountInClip: 30
+  allBulletCount: 2147483647
+  maxBulletCount: 500
+  reloadTime: 1
   bullet: {fileID: 3177356632863467888, guid: eee5a96b8493ddb4e8d13fffa8f4ce00, type: 3}
   bulletSpawnPosition: {fileID: 3032270841497689112}
   bulletLight: {fileID: 1258169713328073097}

@@ -21,8 +21,23 @@ public class WeaponInfo : MonoBehaviour
     [SerializeField] int randomPower = 4;
     public float delay = 0.2f;
 
+    public int bulletCountInClip = 15; //탄창 현재 총알 수
+    public int maxBulletCountInClip = 30; //탄창 최대 총알 수
+    public int allBulletCount = 500; // 소유한 전체 총알 수
+    public int maxBulletCount = 500; // 소유가능한 최대 총알 수
+
+    internal void Init()
+    {
+        allBulletCount = Mathf.Min(allBulletCount, maxBulletCount);
+        int reloadCount = Mathf.Min(allBulletCount, maxBulletCountInClip);
+        allBulletCount -= reloadCount;
+        bulletCountInClip = reloadCount;
+    }
+
+    public float reloadTime = 1; // 재장전시간
+
+
     [Header("총")]
-    public int maxBulletCount = 6;
     public GameObject bullet;
     public Transform bulletSpawnPosition;
     public Light bulletLight;

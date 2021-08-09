@@ -5,20 +5,30 @@ using UnityEngine;
 public partial class Player : Actor
 {
     const string bulletString = "Bullet";
-    GameObject bullet;
+    GameObject Bullet => currentWeapon.bullet;
+    Transform BulletSpawnPosition => currentWeapon.bulletSpawnPosition;
+
 
     float shootDelayEndTime;
     bool isFiring = false;
     [SerializeField] float shootDelay = 0.05f;
 
-    [SerializeField] int bulletCountInClip; //탄창 현재 총알 수
-    [SerializeField] int MaxBulletCountInClip; //탄창 최대 총알 수
-    [SerializeField] int allBulletCount = 500; // 소유한 전체 총알 수
-    [SerializeField] int maxBulletCount = 500; // 소유가능한 최대 총알 수
-    [SerializeField] float reloadTime; // 재장전시간
+    int BulletCountInClip //탄창 현재 총알 수
+    {
+        get => currentWeapon.bulletCountInClip;
+        set => currentWeapon.bulletCountInClip = value;
+    }
+    int MaxBulletCountInClip => currentWeapon.maxBulletCountInClip; //탄창 최대 총알 수
+    int AllBulletCount // 소유한 전체 총알 수
+    {
+        get => currentWeapon.allBulletCount;
+        set => currentWeapon.allBulletCount = value;
+    }
+    int MaxBulletCount => currentWeapon.maxBulletCount; // 소유가능한 최대 총알 수
+    float ReloadTime => currentWeapon.reloadTime; // 재장전시간
     void Fire()
     {
-        if (Input.GetMouseButton(0) && bulletCountInClip > 0)
+        if (Input.GetMouseButton(0) && BulletCountInClip > 0)
         {
             if (shootDelayEndTime < Time.time)
             {
@@ -28,9 +38,9 @@ public partial class Player : Actor
                 switch (currentWeapon.type)
                 {
                     case WeaponInfo.WeaponType.Gun:
-                        bulletCountInClip--;
+                        BulletCountInClip--;
                         IncreaseRecoil();
-                        AmmoUI.Instance.SetBulletCount(bulletCountInClip, MaxBulletCountInClip, bulletCountInClip + allBulletCount, maxBulletCount);
+                        AmmoUI.Instance.SetBulletCount(BulletCountInClip, MaxBulletCountInClip, BulletCountInClip + AllBulletCount, MaxBulletCount);
                         currentWeapon.StartCoroutine(InstantiateBilletAndFlashBulletCo());
                         break;
                     case WeaponInfo.WeaponType.Melee:
@@ -63,7 +73,7 @@ public partial class Player : Actor
     private IEnumerator InstantiateBilletAndFlashBulletCo()
     {
         yield return null;
-        Instantiate(bullet, bulletSpawnPosition.position, CalculateRecoil(transform.rotation));
+        Instantiate(Bullet, BulletSpawnPosition.position, CalculateRecoil(transform.rotation));
 
         bulletLight.SetActive(true);
         yield return new WaitForSeconds(bulletFlashTime);

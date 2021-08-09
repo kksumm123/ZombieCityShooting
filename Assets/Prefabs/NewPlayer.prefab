@@ -1346,7 +1346,7 @@ MonoBehaviour:
   MaxBulletCountInClip: 6
   allBulletCount: 500
   maxBulletCount: 500
-  reloadTime: 2
+  reloadTime: 1
   bulletFlashTime: 0.001
 --- !u!195 &5739982603234904425
 NavMeshAgent:

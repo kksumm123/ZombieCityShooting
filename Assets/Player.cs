@@ -7,7 +7,6 @@ using Cinemachine;
 public partial class Player : Actor
 {
     CapsuleCollider capsuleCol;
-    Transform bulletSpawnPosition;
     [SerializeField] WeaponInfo mainWeapon;
     [SerializeField] WeaponInfo subWeapon;
     [SerializeField] WeaponInfo currentWeapon;
@@ -24,11 +23,16 @@ public partial class Player : Actor
     {
         base.Start();
         hp = 300;
-        HealthUI.Instance.SetGauge(hp, maxHp);
-        AmmoUI.Instance.SetBulletCount(bulletCountInClip, MaxBulletCountInClip, bulletCountInClip + allBulletCount, maxBulletCount);
-
         capsuleCol = GetComponent<CapsuleCollider>();
+
+        if (mainWeapon)
+            mainWeapon.Init();
+        if (subWeapon)
+            subWeapon.Init();
         ChangeWeapon(mainWeapon);
+
+        HealthUI.Instance.SetGauge(hp, maxHp);
+        AmmoUI.Instance.SetBulletCount(BulletCountInClip, MaxBulletCountInClip, BulletCountInClip + AllBulletCount, MaxBulletCount);
 
         var vcs = FindObjectsOfType<CinemachineVirtualCamera>();
         foreach (var item in vcs)
@@ -67,12 +71,12 @@ public partial class Player : Actor
     {
         State = StateType.Reload;
         animator.SetTrigger("Reload");
-        int reloadCount = Mathf.Min(allBulletCount, MaxBulletCountInClip);
-        AmmoUI.Instance.StartReload(reloadCount, MaxBulletCountInClip, bulletCountInClip + allBulletCount, maxBulletCount, reloadTime);
-        yield return new WaitForSeconds(reloadTime);
+        int reloadCount = Mathf.Min(AllBulletCount, MaxBulletCountInClip);
+        AmmoUI.Instance.StartReload(reloadCount, MaxBulletCountInClip, BulletCountInClip + AllBulletCount, MaxBulletCount, ReloadTime);
+        yield return new WaitForSeconds(ReloadTime);
         State = StateType.Idle;
-        allBulletCount -= reloadCount;
-        bulletCountInClip = reloadCount;
+        AllBulletCount -= reloadCount;
+        BulletCountInClip = reloadCount;
     }
 
     Plane plane = new Plane(new Vector3(0, 1, 0), 0);
@@ -218,10 +222,7 @@ public partial class Player : Actor
         if (currentWeapon.attackCollider != null)
             currentWeapon.attackCollider.enabled = false;
 
-        bullet = (GameObject)Resources.Load(bulletString);
-        //bulletSpawnPosition = GameObject.Find("BulletSpawnPosition").transform;
-        //bulletLight = GetComponentInChildren<Light>(true).gameObject;
-        bulletSpawnPosition = currentWeapon.bulletSpawnPosition;
+        //bullet = (GameObject)Resources.Load(bulletString);
         if (currentWeapon.bulletLight != null)
             bulletLight = currentWeapon.bulletLight.gameObject;
         shootDelay = currentWeapon.delay;
