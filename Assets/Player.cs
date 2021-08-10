@@ -46,15 +46,20 @@ public partial class Player : Actor
         {
             List<Zombie> allZombies = new List<Zombie>(FindObjectsOfType<Zombie>());
             var rigbuilder = GetComponentInChildren<RigBuilder>();
+            Transform lastTartget = null;
             if (allZombies.Count > 0)
             {
                 var nearestZombie = allZombies.OrderBy(x => Vector3.Distance(transform.position, x.transform.position))
                                               .First();
-                var sourceObjects = multiAimConstraint.data.sourceObjects;
-                sourceObjects.Clear();
-                sourceObjects.Add(new WeightedTransform(nearestZombie.transform, 1));
-                multiAimConstraint.data.sourceObjects = sourceObjects;
-                rigbuilder.Build();
+                if (nearestZombie.transform != lastTartget)
+                {
+                    lastTartget = nearestZombie.transform;
+                    var sourceObjects = multiAimConstraint.data.sourceObjects;
+                    sourceObjects.Clear();
+                    sourceObjects.Add(new WeightedTransform(lastTartget, 1));
+                    multiAimConstraint.data.sourceObjects = sourceObjects;
+                    rigbuilder.Build();
+                }
             }
             yield return new WaitForSeconds(1);
         }
