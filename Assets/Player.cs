@@ -21,7 +21,7 @@ public partial class Player : Actor
         base.Awake();
 
     }
-    new IEnumerator Start()
+    new void Start()
     {
         base.Start();
         hp = 300;
@@ -41,10 +41,14 @@ public partial class Player : Actor
             item.Follow = transform;
             item.LookAt = transform;
         }
+        StartCoroutine(SettingLookAtTargetCo());
+    }
+    IEnumerator SettingLookAtTargetCo()
+    {
         var multiAimConstraint = GetComponentInChildren<MultiAimConstraint>();
         while (State != StateType.Die)
         {
-            List<Zombie> allZombies = new List<Zombie>(FindObjectsOfType<Zombie>());
+            List<Zombie> allZombies = Zombie.allZombies;
             var rigbuilder = GetComponentInChildren<RigBuilder>();
             Transform lastTartget = null;
             if (allZombies.Count > 0)
@@ -61,10 +65,16 @@ public partial class Player : Actor
                     rigbuilder.Build();
                 }
             }
+            else
+            {
+                //multiAimConstraint.data.sourceObjects.Clear();
+                // Clear 해줘도 인덱스가 남아있음(transform 값만 비워줌)
+                multiAimConstraint.data.sourceObjects = new WeightedTransformArray();
+                rigbuilder.Build();
+            }
             yield return new WaitForSeconds(1);
         }
     }
-
     private void WeaponInit(WeaponInfo weaponInfo)
     {
         if (weaponInfo)

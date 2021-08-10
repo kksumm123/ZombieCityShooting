@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 
 public class Zombie : Actor
 {
+    public static List<Zombie> allZombies = new List<Zombie>();
+
     NavMeshAgent agent;
     Transform target;
     SphereCollider sphereCollider;
@@ -31,10 +33,11 @@ public class Zombie : Actor
         }
     }
 
-    bool isLive = false;
+    bool isAlive = false;
     new IEnumerator Start()
     {
         base.Start();
+        allZombies.Add(this);
 
         agent = GetComponent<NavMeshAgent>();
         originSpeed = agent.speed;
@@ -46,9 +49,9 @@ public class Zombie : Actor
 
         CurrentFSM = ChaseFSM;
 
-        isLive = true;
+        isAlive = true;
 
-        while (isLive)
+        while (isAlive)
         { //상태를 무한히 반복해서 실행하는 부분
             var previousFSM = CurrentFSM;
 
@@ -200,7 +203,8 @@ public class Zombie : Actor
     [SerializeField] float dieMaterialDuration = 2;
     void Die()
     {
-        isLive = false;
+        allZombies.Remove(this);
+        isAlive = false;
         StageManager.Instance.AddScore(rewardScore);
 
         animator.Play("Die");
