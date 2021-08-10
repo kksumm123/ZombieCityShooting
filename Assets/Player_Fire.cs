@@ -28,32 +28,44 @@ public partial class Player : Actor
     float ReloadTime => currentWeapon.reloadTime; // 재장전시간
     void Fire()
     {
-        if (Input.GetMouseButton(0) && BulletCountInClip > 0)
+        if (Input.GetMouseButton(0))
         {
-            if (shootDelayEndTime < Time.time)
+            if (BulletCountInClip > 0)
             {
                 isFiring = true;
-                animator.SetTrigger("FireStart");
-                shootDelayEndTime = Time.time + shootDelay;
-                switch (currentWeapon.type)
+                if (shootDelayEndTime < Time.time)
                 {
-                    case WeaponInfo.WeaponType.Gun:
-                        BulletCountInClip--;
-                        IncreaseRecoil();
-                        AmmoUI.Instance.SetBulletCount(BulletCountInClip, MaxBulletCountInClip, BulletCountInClip + AllBulletCount, MaxBulletCount);
-                        currentWeapon.StartCoroutine(InstantiateBilletAndFlashBulletCo());
-                        break;
-                    case WeaponInfo.WeaponType.Melee:
-                        // 무기의 콜라이더 활성화, 무기가 휘둘리며 충돌하도록
-                        currentWeapon.StartCoroutine(MeleeAttackCo());
-                        break;
+                    animator.SetTrigger("FireStart");
+                    shootDelayEndTime = Time.time + shootDelay;
+                    switch (currentWeapon.type)
+                    {
+                        case WeaponInfo.WeaponType.Gun:
+                            BulletCountInClip--;
+                            IncreaseRecoil();
+                            AmmoUI.Instance.SetBulletCount(BulletCountInClip, MaxBulletCountInClip, BulletCountInClip + AllBulletCount, MaxBulletCount);
+                            currentWeapon.StartCoroutine(InstantiateBilletAndFlashBulletCo());
+                            break;
+                        case WeaponInfo.WeaponType.Melee:
+                            // 무기의 콜라이더 활성화, 무기가 휘둘리며 충돌하도록
+                            currentWeapon.StartCoroutine(MeleeAttackCo());
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                if (reloadAlertDelayEndTime < Time.time)
+                {
+                    reloadAlertDelayEndTime = Time.time + reloadAlertDelay;
+                    CreateTextEffect("Reload!", "TalkEffect", transform.position, Color.white, transform);
                 }
             }
         }
         else
             EndFiring();
     }
-
+    [SerializeField] float reloadAlertDelay = 1f;
+    float reloadAlertDelayEndTime;
     IEnumerator MeleeAttackCo()
     {
         yield return new WaitForSeconds(currentWeapon.attackStartTime);

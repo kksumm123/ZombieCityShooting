@@ -6,7 +6,6 @@ using UnityEngine;
 public class Actor : MonoBehaviour
 {
     protected Animator animator;
-    static GameObject textEffectGo;
 
     [SerializeField] protected int hp = 100;
     protected int maxHp;
@@ -18,7 +17,6 @@ public class Actor : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         bloodParticle = (GameObject)Resources.Load("BloodParticle");
-        textEffectGo = (GameObject)Resources.Load("TextEffect");
     }
 
     GameObject bloodParticle;
@@ -34,10 +32,17 @@ public class Actor : MonoBehaviour
     }
     public static void CreateTextEffect(int value, Vector3 position, Color color)
     {
+        CreateTextEffect(value.ToNumber(), "TextEffect", position, color);
+    }
+    public static void CreateTextEffect(string str, string prefabName, Vector3 position, Color color, Transform parent = null)
+    {
+        var memoryGo = (GameObject)Resources.Load(prefabName);
         var randomPos = new Vector3(Random.Range(-0.3f, 0.3f), 0, Random.Range(-0.1f, 0.1f));
-        var newGo = Instantiate(textEffectGo, position + randomPos, Camera.main.transform.rotation);
-        var textMeshPro = newGo.GetComponent<TextMeshPro>();
-        textMeshPro.text = value.ToNumber();
+        var newGo = Instantiate(memoryGo, position + randomPos, Camera.main.transform.rotation);
+        if (parent)
+            newGo.transform.parent = parent;
+        var textMeshPro = newGo.GetComponentInChildren<TextMeshPro>();
+        textMeshPro.text = str;
         var colorGradient = textMeshPro.colorGradient;
         colorGradient.bottomLeft = color;
         textMeshPro.colorGradient = colorGradient;
