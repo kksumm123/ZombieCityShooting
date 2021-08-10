@@ -189,15 +189,15 @@ MonoBehaviour:
   power: 20
   randomPower: 4
   delay: 0.8
+  knockBackForce: 1
+  bullet: {fileID: 0}
+  bulletSpawnPosition: {fileID: 0}
+  bulletLight: {fileID: 0}
   bulletCountInClip: 1000
   maxBulletCountInClip: 1000
   allBulletCount: 1000
   maxBulletCount: 1000
   reloadTime: 1
-  bullet: {fileID: 0}
-  bulletSpawnPosition: {fileID: 0}
-  bulletLight: {fileID: 0}
   attackStartTime: 0.4
   attackTime: 0.1
   attackCollider: {fileID: 1192544338}
-  knockBackForce: 1

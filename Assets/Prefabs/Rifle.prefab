@@ -200,7 +200,7 @@ MonoBehaviour:
   bulletLight: {fileID: 1258169713328073097}
   bulletCountInClip: 30
   maxBulletCountInClip: 30
-  allBulletCount: 2147483647
+  allBulletCount: 500
   maxBulletCount: 500
   reloadTime: 1
   attackStartTime: 0.2

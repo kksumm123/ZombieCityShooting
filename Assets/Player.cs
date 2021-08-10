@@ -25,10 +25,9 @@ public partial class Player : Actor
         hp = 300;
         capsuleCol = GetComponent<CapsuleCollider>();
 
-        if (mainWeapon)
-            mainWeapon.Init();
-        if (subWeapon)
-            subWeapon.Init();
+        WeaponInit(mainWeapon);
+        WeaponInit(subWeapon);
+
         ChangeWeapon(mainWeapon);
 
         HealthUI.Instance.SetGauge(hp, maxHp);
@@ -39,6 +38,16 @@ public partial class Player : Actor
         {
             item.Follow = transform;
             item.LookAt = transform;
+        }
+    }
+
+    private void WeaponInit(WeaponInfo weaponInfo)
+    {
+        if (weaponInfo)
+        {
+            weaponInfo = Instantiate(weaponInfo, transform);
+            weaponInfo.Init();
+            weaponInfo.gameObject.SetActive(false);
         }
     }
 
