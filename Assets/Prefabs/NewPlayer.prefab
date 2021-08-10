@@ -1342,11 +1342,7 @@ MonoBehaviour:
   diePreDelayTime: 1
   m_state: 0
   shootDelay: 0.05
-  bulletCountInClip: 2
-  MaxBulletCountInClip: 6
-  allBulletCount: 500
-  maxBulletCount: 500
-  reloadTime: 1
+  reloadAlertDelay: 1.5
   bulletFlashTime: 0.001
 --- !u!195 &5739982603234904425
 NavMeshAgent:

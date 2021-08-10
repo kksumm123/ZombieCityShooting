@@ -64,7 +64,7 @@ public partial class Player : Actor
         else
             EndFiring();
     }
-    [SerializeField] float reloadAlertDelay = 1f;
+    [SerializeField] float reloadAlertDelay = 1.5f;
     float reloadAlertDelayEndTime;
     IEnumerator MeleeAttackCo()
     {
