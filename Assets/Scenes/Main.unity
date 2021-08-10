@@ -12514,6 +12514,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1136383477, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.transform
+      value: 
+      objectReference: {fileID: 4144714828015897041}
     - target: {fileID: 7982174732958607612, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
       propertyPath: m_Name
       value: NewPlayer
@@ -12695,6 +12699,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 999849191}
     m_Modifications:
+    - target: {fileID: 1401509041556577099, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
+      propertyPath: hp
+      value: 9999999
+      objectReference: {fileID: 0}
     - target: {fileID: 5468582711486977360, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
       propertyPath: m_RootOrder
       value: 0
