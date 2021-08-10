@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System.Linq;
+using UnityEngine.Animations.Rigging;
 
 public partial class Player : Actor
 {
@@ -19,7 +21,7 @@ public partial class Player : Actor
         base.Awake();
 
     }
-    new void Start()
+    new IEnumerator Start()
     {
         base.Start();
         hp = 300;
@@ -38,6 +40,23 @@ public partial class Player : Actor
         {
             item.Follow = transform;
             item.LookAt = transform;
+        }
+        var multiAimConstraint = GetComponentInChildren<MultiAimConstraint>();
+        while (State != StateType.Die)
+        {
+            List<Zombie> allZombies = new List<Zombie>(FindObjectsOfType<Zombie>());
+            var rigbuilder = GetComponentInChildren<RigBuilder>();
+            if (allZombies.Count > 0)
+            {
+                var nearestZombie = allZombies.OrderBy(x => Vector3.Distance(transform.position, x.transform.position))
+                                              .First();
+                var sourceObjects = multiAimConstraint.data.sourceObjects;
+                sourceObjects.Clear();
+                sourceObjects.Add(new WeightedTransform(nearestZombie.transform, 1));
+                multiAimConstraint.data.sourceObjects = sourceObjects;
+                rigbuilder.Build();
+            }
+            yield return new WaitForSeconds(1);
         }
     }
 
