@@ -40,3 +40,12 @@ The following packages were added:
   com.unity.modules.xr@1.0.0
   com.unity.textmeshpro@3.0.6
   com.unity.ugui@1.0.0
+
+=== Wed Aug 11 16:35:30 2021
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.animation.rigging from version 1.0.3 to 1.1.0
+  com.unity.cinemachine from version 2.6.5 to 2.8.0-pre.1

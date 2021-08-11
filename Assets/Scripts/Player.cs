@@ -41,15 +41,17 @@ public partial class Player : Actor
             item.Follow = transform;
             item.LookAt = transform;
         }
+
         StartCoroutine(SettingLookAtTargetCo());
     }
+
     IEnumerator SettingLookAtTargetCo()
     {
         var multiAimConstraint = GetComponentInChildren<MultiAimConstraint>();
+        var rigbuilder = GetComponentInChildren<RigBuilder>();
         while (State != StateType.Die)
         {
             List<Zombie> allZombies = Zombie.allZombies;
-            var rigbuilder = GetComponentInChildren<RigBuilder>();
             Transform lastTartget = null;
             if (allZombies.Count > 0)
             {
@@ -101,7 +103,7 @@ public partial class Player : Actor
             }
         }
     }
-
+    #region ReloadBullet
     void ReloadBullet()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -121,20 +123,8 @@ public partial class Player : Actor
         AllBulletCount -= reloadCount;
         BulletCountInClip = reloadCount;
     }
-
-    Plane plane = new Plane(new Vector3(0, 1, 0), 0);
-    void LookAtMouse()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (plane.Raycast(ray, out float enter))
-        {
-            Vector3 hitPoint = ray.GetPoint(enter);
-            Vector3 dir = hitPoint - transform.position;
-            dir.y = transform.position.y;
-            dir.Normalize();
-            RotationSlerp(dir);
-        }
-    }
+    #endregion ReloadBullet
+    
     #region Move
     Vector3 move;
     void Move()
@@ -157,26 +147,50 @@ public partial class Player : Actor
 
             move.Normalize();
 
+            float forwardDegree = transform.forward.VectorToDegree();
+            float moveDegree = move.VectorToDegree();
+            float dirRadian = (moveDegree - forwardDegree + 90) * Mathf.PI / 180; //라디안값
+            Vector3 dir;
+            dir.x = Mathf.Cos(dirRadian);// 
+            dir.z = Mathf.Sin(dirRadian);//
+
+            animator.SetFloat("DirX", dir.x);
+            animator.SetFloat("DirY", dir.z);
+
             transform.Translate(
                 (isFiring == true ? shootingSpeed : speed)
                 * rollingSpeedMult * Time.deltaTime * move, Space.World);
             State = StateType.Run;
 
-            if (Mathf.RoundToInt(transform.forward.x) == 1 || Mathf.RoundToInt(transform.forward.x) == -1)
-            {
-                animator.SetFloat("DirX", transform.forward.z * move.z);
-                animator.SetFloat("DirY", transform.forward.x * move.x);
-            }
-            else
-            {
-                animator.SetFloat("DirX", transform.forward.x * move.x);
-                animator.SetFloat("DirY", transform.forward.z * move.z);
-            }
+            //if (Mathf.RoundToInt(transform.forward.x) == 1 || Mathf.RoundToInt(transform.forward.x) == -1)
+            //{
+            //    animator.SetFloat("DirX", transform.forward.z * move.z);
+            //    animator.SetFloat("DirY", transform.forward.x * move.x);
+            //}
+            //else
+            //{
+            //    animator.SetFloat("DirX", transform.forward.x * move.x);
+            //    animator.SetFloat("DirY", transform.forward.z * move.z);
+            //}
         }
         else
             State = StateType.Idle;
 
         animator.SetFloat("Speed", move.sqrMagnitude);
+    }
+
+    Plane plane = new Plane(new Vector3(0, 1, 0), 0);
+    void LookAtMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (plane.Raycast(ray, out float enter))
+        {
+            Vector3 hitPoint = ray.GetPoint(enter);
+            Vector3 dir = hitPoint - transform.position;
+            dir.y = 0;
+            dir.Normalize();
+            RotationSlerp(dir);
+        }
     }
     #endregion Move
 
