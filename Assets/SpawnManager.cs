@@ -2,26 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : SingletonMonoBehavior<SpawnManager>
 {
     [SerializeField] int currentWave = 0;
     [SerializeField] List<WaveInfo> waves;
+    
+    public float nextWaveTime;
 
     IEnumerator Start()
     {
         LightManager LightManager = FindObjectOfType<LightManager>();
         var spawnPoints = GetComponentsInChildren<SpawnPoint>(true);
-        foreach (var item in waves)
+        foreach (var currentWaveInfo in waves)
         {
             currentWave++;
-            int spawnCount = item.spawnCount;
+            int spawnCount = currentWaveInfo.spawnCount;
             for (int i = 0; i < spawnCount; i++)
             {
                 Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-                Instantiate(item.monsterGo, spawnPoint, Quaternion.identity);
+                Instantiate(currentWaveInfo.monsterGo, spawnPoint, Quaternion.identity);
             }
+            nextWaveTime = Time.time + currentWaveInfo.time;
+            
+            while (Time.time < nextWaveTime)
+                yield return null;
 
-            yield return new WaitForSeconds(item.time);
             LightManager.ToggleDayLight();
         }
     }

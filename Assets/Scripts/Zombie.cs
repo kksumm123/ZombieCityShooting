@@ -204,6 +204,9 @@ public class Zombie : Actor
     void Die()
     {
         allZombies.Remove(this);
+        if (allZombies.Count == 0)
+            SpawnManager.Instance.nextWaveTime = 0;
+
         isAlive = false;
         StageManager.Instance.AddScore(rewardScore);
 
