@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    GameObject monsterGo;
     [SerializeField] int spawnCount = 10;
+
     void Start()
     {
-        var spawnPoints = GetComponentsInChildren<SpawnPoint>(true);   
-    }
+        monsterGo = (GameObject)Resources.Load("Zombie");
 
-    void Update()
-    {
-        
+        var spawnPoints = GetComponentsInChildren<SpawnPoint>(true);
+        for (int i = 0; i < spawnCount; i++)
+        {
+            Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+            Instantiate(monsterGo, spawnPoint, Quaternion.identity);
+        }
     }
 }
