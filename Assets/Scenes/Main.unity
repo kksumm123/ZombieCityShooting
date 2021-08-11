@@ -568,7 +568,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6984615, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7510,14 +7510,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3127e06a676d7e46b20a8e8feed2591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completeUiInite: 0
   currentWave: 0
   waves:
-  - monsterGo: {fileID: 6762632452598938109, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
+  - monsterList:
+    - monster: {fileID: 6762632452598938109, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
+      ratio: 1
+    - monster: {fileID: 8082273391730693440, guid: 2d570beb2ddf9984d985aca08bd100e4, type: 3}
+      ratio: 0.3
     spawnCount: 10
     time: 10
-  - monsterGo: {fileID: 6762632452598938109, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
+  - monsterList:
+    - monster: {fileID: 6762632452598938109, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
+      ratio: 1
+    - monster: {fileID: 8082273391730693440, guid: 2d570beb2ddf9984d985aca08bd100e4, type: 3}
+      ratio: 0.6
+    - monster: {fileID: 8463834677783204283, guid: 6c92fa42a1de7ad4fa5382fa4fe58060, type: 3}
+      ratio: 0.1
     spawnCount: 15
     time: 10
+  nextWaveTime: 0
 --- !u!1 &1217366402
 GameObject:
   m_ObjectHideFlags: 0
@@ -8792,7 +8804,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6984615, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -9957,7 +9969,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6984615, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10146,7 +10158,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6984615, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12041,7 +12053,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6984615, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

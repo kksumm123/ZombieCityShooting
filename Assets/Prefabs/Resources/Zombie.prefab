@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9d12bd7e8219b449810fb7a6f97d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 200
+  hp: 100
   damageColor: {r: 1, g: 1, b: 0, a: 1}
   rewardScore: 100
   power: 20

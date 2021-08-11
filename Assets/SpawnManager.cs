@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpawnManager : SingletonMonoBehavior<SpawnManager>
 {
     [SerializeField] int currentWave = 0;
     [SerializeField] List<WaveInfo> waves;
-    
+
     public float nextWaveTime;
 
     IEnumerator Start()
@@ -20,10 +21,13 @@ public class SpawnManager : SingletonMonoBehavior<SpawnManager>
             for (int i = 0; i < spawnCount; i++)
             {
                 Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-                Instantiate(currentWaveInfo.monsterGo, spawnPoint, Quaternion.identity);
+                Instantiate(currentWaveInfo.monsterList
+                                            .OrderBy(x => Random.Range(0, x.ratio))
+                                            .Last().monster
+                          , spawnPoint, Quaternion.identity);
             }
             nextWaveTime = Time.time + currentWaveInfo.time;
-            
+
             while (Time.time < nextWaveTime)
                 yield return null;
 
@@ -33,16 +37,16 @@ public class SpawnManager : SingletonMonoBehavior<SpawnManager>
     [System.Serializable]
     public class WaveInfo
     {
-        public GameObject monsterGo;
+        public List<ReGenMonsterInfo> monsterList;
         public int spawnCount = 10;
         public float time;
     }
-    //[System.Serializable]
-    //public class RegionInfo
-    //{
-    //    public GameObject monsterGo;
-    //    public float ratio;
-    //}
+    [System.Serializable]
+    public class ReGenMonsterInfo
+    {
+        public GameObject monster;
+        public float ratio;
+    }
 
 
 }
