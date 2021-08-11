@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        LightManager LightManager = FindObjectOfType<LightManager>();
         var spawnPoints = GetComponentsInChildren<SpawnPoint>(true);
         foreach (var item in waves)
         {
@@ -21,6 +22,7 @@ public class SpawnManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(item.time);
+            LightManager.ToggleDayLight();
         }
     }
     [System.Serializable]
@@ -36,4 +38,6 @@ public class SpawnManager : MonoBehaviour
     //    public GameObject monsterGo;
     //    public float ratio;
     //}
+
+
 }

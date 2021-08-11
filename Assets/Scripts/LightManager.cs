@@ -42,7 +42,6 @@ public class LightManager : MonoBehaviour
     {
         ChangeDayLight();
     }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -50,6 +49,16 @@ public class LightManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
             ChangeNightLight();
+    }
+    bool isDay = true;
+    public void ToggleDayLight()
+    {
+        if (isDay == true)
+            ChangeNightLight();
+        else
+            ChangeDayLight();
+
+        isDay = !isDay;
     }
 
     Dictionary<Light, float> allLightMap; //= new Dictionary<Light, float>();
