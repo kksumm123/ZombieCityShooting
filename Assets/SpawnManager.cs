@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] int spawnCount = 10;
     void Start()
     {
-        
+        var spawnPoints = GetComponentsInChildren<SpawnPoint>(true);   
     }
 
-    // Update is called once per frame
     void Update()
     {
         
