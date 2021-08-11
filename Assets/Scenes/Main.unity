@@ -568,7 +568,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5255972, y: 1}
+    m_SensorSize: {x: 1.6984615, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7510,7 +7510,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3127e06a676d7e46b20a8e8feed2591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 15
+  currentWave: 0
+  waves:
+  - monsterGo: {fileID: 6762632452598938109, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
+    spawnCount: 10
+    time: 10
+  - monsterGo: {fileID: 6762632452598938109, guid: 673500fb7eef0044ba2215777fa3f0f8, type: 3}
+    spawnCount: 15
+    time: 10
 --- !u!1 &1217366402
 GameObject:
   m_ObjectHideFlags: 0
@@ -8785,7 +8792,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5255972, y: 1}
+    m_SensorSize: {x: 1.6984615, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -9950,7 +9957,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5255972, y: 1}
+    m_SensorSize: {x: 1.6984615, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10139,7 +10146,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5255972, y: 1}
+    m_SensorSize: {x: 1.6984615, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12034,7 +12041,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5255972, y: 1}
+    m_SensorSize: {x: 1.6984615, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

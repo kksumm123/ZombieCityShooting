@@ -4,18 +4,36 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    GameObject monsterGo;
-    [SerializeField] int spawnCount = 10;
+    [SerializeField] int currentWave = 0;
+    [SerializeField] List<WaveInfo> waves;
 
-    void Start()
+    IEnumerator Start()
     {
-        monsterGo = (GameObject)Resources.Load("Zombie");
-
         var spawnPoints = GetComponentsInChildren<SpawnPoint>(true);
-        for (int i = 0; i < spawnCount; i++)
+        foreach (var item in waves)
         {
-            Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
-            Instantiate(monsterGo, spawnPoint, Quaternion.identity);
+            currentWave++;
+            int spawnCount = item.spawnCount;
+            for (int i = 0; i < spawnCount; i++)
+            {
+                Vector3 spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+                Instantiate(item.monsterGo, spawnPoint, Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(item.time);
         }
     }
+    [System.Serializable]
+    public class WaveInfo
+    {
+        public GameObject monsterGo;
+        public int spawnCount = 10;
+        public float time;
+    }
+    //[System.Serializable]
+    //public class RegionInfo
+    //{
+    //    public GameObject monsterGo;
+    //    public float ratio;
+    //}
 }
