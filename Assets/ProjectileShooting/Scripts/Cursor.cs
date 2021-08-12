@@ -1,8 +1,16 @@
 using UnityEngine;
 
 public class Cursor : MonoBehaviour 
-{    
-	void Update () 
+{
+    Transform originParent;
+    void Start()
+    {
+        originParent = transform.parent;
+        transform.parent = null;
+        transform.localScale = Vector3.one;
+        transform.parent = originParent;
+    }
+    void Update () 
 	{
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -11,5 +19,7 @@ public class Cursor : MonoBehaviour
         {
             transform.position = hit.point;
         }
-	}
+
+        transform.rotation = Quaternion.identity;
+    }
 }
