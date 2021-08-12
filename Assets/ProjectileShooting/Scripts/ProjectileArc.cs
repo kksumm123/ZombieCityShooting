@@ -10,15 +10,23 @@ public class ProjectileArc : MonoBehaviour
 
     private Color initialColor;
     private LineRenderer lineRenderer;
+    Material lineMaterial;
 
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         initialColor = lineRenderer.material.color;
+        lineMaterial = lineRenderer.sharedMaterial;
     }
 
+    Vector2 offset;
     public void UpdateArc(float speed, float distance, float gravity, float angle, Vector3 direction, bool valid)
     {
+
+        offset = lineMaterial.mainTextureOffset;
+        offset.x -= 0.01f;
+        lineMaterial.mainTextureOffset = offset;
+
         var originParent = transform.parent;
         transform.parent = null;
         transform.localScale = Vector3.one;
