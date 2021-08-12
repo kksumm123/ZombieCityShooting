@@ -30,6 +30,7 @@ public partial class Player : Actor
 
         WeaponInit(mainWeapon);
         WeaponInit(subWeapon);
+        WeaponInit(throwWeapon);
 
         ChangeWeapon(mainWeapon);
 

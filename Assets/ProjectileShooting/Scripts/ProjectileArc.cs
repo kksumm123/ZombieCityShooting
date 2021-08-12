@@ -19,6 +19,11 @@ public class ProjectileArc : MonoBehaviour
 
     public void UpdateArc(float speed, float distance, float gravity, float angle, Vector3 direction, bool valid)
     {
+        var originParent = transform.parent;
+        transform.parent = null;
+        transform.localScale = Vector3.one;
+        transform.parent = originParent;
+
         Vector2[] arcPoints = ProjectileMath.ProjectileArcPoints(iterations, speed, distance, gravity, angle);        
         Vector3[] points3d = new Vector3[arcPoints.Length];
 

@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  speed: 5
+  speed: 10
   grenadeGo: {fileID: 8247443768852492677, guid: 6b4965ce816c9a8429b9c73102572944, type: 3}
   firePoint: {fileID: 0}
   currentAngle: 0

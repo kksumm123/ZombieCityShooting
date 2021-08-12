@@ -49,6 +49,10 @@ public partial class Player : Actor
                             // 무기의 콜라이더 활성화, 무기가 휘둘리며 충돌하도록
                             currentWeapon.StartCoroutine(MeleeAttackCo());
                             break;
+                        case WeaponInfo.WeaponType.Throw:
+                            // 무기의 콜라이더 활성화, 무기가 휘둘리며 충돌하도록
+                            currentWeapon.StartCoroutine(ThrowAttackCo());
+                            break;
                     }
                 }
             }
@@ -64,6 +68,7 @@ public partial class Player : Actor
         else
             EndFiring();
     }
+
     [SerializeField] float reloadAlertDelay = 1.5f;
     float reloadAlertDelayEndTime;
     IEnumerator MeleeAttackCo()
@@ -72,6 +77,12 @@ public partial class Player : Actor
         currentWeapon.attackCollider.enabled = true;
         yield return new WaitForSeconds(currentWeapon.attackTime);
         currentWeapon.attackCollider.enabled = false;
+    }
+
+    IEnumerator ThrowAttackCo()
+    {
+        currentWeapon.GetComponentInChildren<GrenadeLauncher>().ThrowObject();
+        yield return null;
     }
 
     private void EndFiring()

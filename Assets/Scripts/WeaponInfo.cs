@@ -42,8 +42,6 @@ public class WeaponInfo : MonoBehaviour
     [Header("ÅõÃ´°ø°Ý")]
     public GameObject throwGo;
 
-
-
     private void Start()
     {
         power += Random.Range(-randomPower, randomPower);

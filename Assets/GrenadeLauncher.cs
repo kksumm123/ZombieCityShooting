@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,13 @@ using UnityEngine;
 public class GrenadeLauncher : MonoBehaviour
 {
     ProjectileArc projectileArc;
+    LineRenderer lineRenderer;
     public Cursor cursor;
     [SerializeField] float speed = 10;
     void Start()
     {
         projectileArc = GetComponent<ProjectileArc>();
+        lineRenderer = GetComponentInChildren<LineRenderer>();
         firePoint = transform;
         cursor = FindObjectOfType<Cursor>();
     }
@@ -18,18 +21,29 @@ public class GrenadeLauncher : MonoBehaviour
     {
         SetTargetWithSpeed(cursor.transform.position, speed);
 
-        // 수류탄 발사 구현
-        if (Input.GetMouseButtonDown(1))
-        {
-            // 수류탄 생성
-            // 리지드 바디에 포스 줘서 날리자
-            var newGo = Instantiate(grenadeGo, firePoint.position, Quaternion.identity);
-            newGo.transform.forward = direction;
-            float degree = -currentAngle * Mathf.Rad2Deg; // !앵글 -주의
-            newGo.transform.Rotate(degree, 0, degree); // y각도를 위해 x, z 회전
-            var newGoRigid = newGo.GetComponent<Rigidbody>();
-            newGoRigid.velocity = newGo.transform.forward * speed;
-        }
+        //// 수류탄 발사 구현
+        //if (Input.GetMouseButtonDown(1))
+        //    ThrowObject();
+    }
+
+    public void ThrowObject()
+    {
+        // 수류탄 생성
+        // 리지드 바디에 포스 줘서 날리자
+        var newGo = Instantiate(grenadeGo, firePoint.position, Quaternion.identity);
+        newGo.transform.forward = direction;
+        float degree = -currentAngle * Mathf.Rad2Deg; // !앵글 -주의
+        newGo.transform.Rotate(degree, 0, degree); // y각도를 위해 x, z 회전
+        var newGoRigid = newGo.GetComponent<Rigidbody>();
+        newGoRigid.velocity = newGo.transform.forward * speed;
+        StartCoroutine(LineRendererOnOffCo());
+    }
+
+    private IEnumerator LineRendererOnOffCo()
+    {
+        lineRenderer.enabled = false; 
+        yield return new WaitForSeconds(0.5f);
+        lineRenderer.enabled = true;
     }
 
     public GameObject grenadeGo;
