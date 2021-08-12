@@ -105,7 +105,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  speed: 10
+  speed: 5
+  grenadeGo: {fileID: 8247443768852492677, guid: 6b4965ce816c9a8429b9c73102572944, type: 3}
   firePoint: {fileID: 0}
   currentAngle: 0
