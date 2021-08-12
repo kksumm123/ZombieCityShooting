@@ -11,6 +11,7 @@ public partial class Player : Actor
     CapsuleCollider capsuleCol;
     [SerializeField] WeaponInfo mainWeapon;
     [SerializeField] WeaponInfo subWeapon;
+    [SerializeField] WeaponInfo throwWeapon;
     [SerializeField] WeaponInfo currentWeapon;
     [SerializeField] Transform rightWeaponPosition;
 
@@ -98,10 +99,21 @@ public partial class Player : Actor
                 Fire();
                 Roll();
                 ReloadBullet();
-                if (Input.GetKeyDown(KeyCode.Tab))
-                    ToggleChangeWeapon();
+                ChangeWeapon();
+                //if (Input.GetKeyDown(KeyCode.Tab))
+                //    ToggleChangeWeapon();
             }
         }
+    }
+
+    void ChangeWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            ChangeWeapon(mainWeapon);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            ChangeWeapon(subWeapon);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            ChangeWeapon(throwWeapon);
     }
     #region ReloadBullet
     void ReloadBullet()
@@ -124,7 +136,7 @@ public partial class Player : Actor
         BulletCountInClip = reloadCount;
     }
     #endregion ReloadBullet
-    
+
     #region Move
     Vector3 move;
     void Move()

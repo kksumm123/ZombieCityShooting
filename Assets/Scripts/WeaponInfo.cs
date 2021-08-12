@@ -12,6 +12,7 @@ public class WeaponInfo : MonoBehaviour
     {
         Gun,
         Melee, // ±ÙÁ¢°ø°Ý, ÃÑ¾Ë, None, Etc
+        Throw, // ¼ö·ùÅº, ¿¬¸·Åº, etc
     }
 
     public WeaponType type;
@@ -37,6 +38,11 @@ public class WeaponInfo : MonoBehaviour
     public float attackStartTime = 0.4f;
     public float attackTime = 0.1f;
     public Collider attackCollider;
+
+    [Header("ÅõÃ´°ø°Ý")]
+    public GameObject throwGo;
+
+
 
     private void Start()
     {
