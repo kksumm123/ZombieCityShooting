@@ -8,6 +8,7 @@ using UnityEngine.Animations.Rigging;
 
 public partial class Player : Actor
 {
+    AudioSource audioSource;
     CapsuleCollider capsuleCol;
     [SerializeField] WeaponInfo mainWeapon;
     [SerializeField] WeaponInfo subWeapon;
@@ -27,6 +28,7 @@ public partial class Player : Actor
         base.Start();
         hp = 300;
         capsuleCol = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
 
         WeaponInit(mainWeapon);
         WeaponInit(subWeapon);
@@ -189,6 +191,8 @@ public partial class Player : Actor
         else
             State = StateType.Idle;
 
+        audioSource.enabled = move.sqrMagnitude > 0;
+
         animator.SetFloat("Speed", move.sqrMagnitude);
     }
 
@@ -211,7 +215,10 @@ public partial class Player : Actor
     void Roll()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            audioSource.enabled = false;
             StartCoroutine(RollCo());
+        }
     }
 
     [SerializeField] AnimationCurve rollingSpeedAC;
