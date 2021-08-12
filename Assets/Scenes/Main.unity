@@ -9684,6 +9684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad591e4656800644b048606a10010a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
+  speed: 10
+  firePoint: {fileID: 0}
+  currentAngle: 0
 --- !u!1 &1510280490
 GameObject:
   m_ObjectHideFlags: 0
