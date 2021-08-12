@@ -1960,6 +1960,7 @@ GameObject:
   - component: {fileID: 5739982603234904425}
   - component: {fileID: 7893905659964229606}
   - component: {fileID: 7893905659964229593}
+  - component: {fileID: 5548408369082544194}
   m_Layer: 7
   m_Name: NewPlayer
   m_TagString: Player
@@ -2000,6 +2001,7 @@ MonoBehaviour:
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   mainWeapon: {fileID: 7119531273919437861, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}
   subWeapon: {fileID: 5587687938452155612, guid: c99a721fa067cdf418e79f3589636395, type: 3}
+  throwWeapon: {fileID: 5435327373180093934, guid: e80fe3517476692499464eb5b1fcd91a, type: 3}
   currentWeapon: {fileID: 0}
   rightWeaponPosition: {fileID: 65558201362697500}
   speed: 5
@@ -2095,6 +2097,14 @@ CapsuleCollider:
   m_Height: 1.64
   m_Direction: 1
   m_Center: {x: 0, y: 0.79, z: 0}
+--- !u!81 &5548408369082544194
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7982174732958607612}
+  m_Enabled: 1
 --- !u!1 &8161461219934681263
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,6 +2382,10 @@ PrefabInstance:
     - target: {fileID: 4299678289989910031, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}
       propertyPath: m_Name
       value: Rifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299678289989910031, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}

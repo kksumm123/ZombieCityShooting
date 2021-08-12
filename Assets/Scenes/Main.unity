@@ -6948,7 +6948,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
@@ -6957,14 +6956,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -14122,18 +14113,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3947856961400495321, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7982174732958607612, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 7982174732958607614, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
-      propertyPath: throwWeapon
-      value: 
-      objectReference: {fileID: 5435327373180093934, guid: e80fe3517476692499464eb5b1fcd91a, type: 3}
     - target: {fileID: 7982174732958607615, guid: 21089eb515d932e4da180f118d2d72bb, type: 3}
       propertyPath: m_RootOrder
       value: 10

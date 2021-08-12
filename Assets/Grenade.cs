@@ -8,7 +8,7 @@ public class Grenade : MonoBehaviour
     [SerializeField] float damageArea = 5;
     [SerializeField] float knockBackForce = 5;
     [SerializeField] float destroyDelay = 3;
-    GameObject destroyEffect;
+    [SerializeField] GameObject destroyEffect;
     LayerMask attackableLayer;
 
     IEnumerator Start()
@@ -24,7 +24,10 @@ public class Grenade : MonoBehaviour
             item.GetComponent<Zombie>().TakeHit(power, transform, knockBackForce);
         }
 
-        // Æø¹ß ÀÌÆåÆ® Ç¥½Ã
-        //Instantiate(destroyEffect, transform.position, Quaternion.identity);
+         //Æø¹ß ÀÌÆåÆ® Ç¥½Ã
+        Instantiate(destroyEffect, transform.position, Quaternion.identity);
+
+        // ¼ö·ùÅº »èÁ¦
+        Destroy(gameObject);
     }
 }
