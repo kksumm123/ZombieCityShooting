@@ -9738,14 +9738,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1455492508, guid: 89699d43a82bc6e47ac26ef9f73e0917, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1455492508, guid: 89699d43a82bc6e47ac26ef9f73e0917, type: 3}
-      propertyPath: grenadeGo
-      value: 
-      objectReference: {fileID: 8247443768852492677, guid: 6b4965ce816c9a8429b9c73102572944, type: 3}
     - target: {fileID: 6390678731291710483, guid: 89699d43a82bc6e47ac26ef9f73e0917, type: 3}
       propertyPath: m_RootOrder
       value: 12
