@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,10 +11,15 @@ public class RankingUIItem : MonoBehaviour
     TextMeshProUGUI scoreValue;
     Button button;
 
-    void Start()
+    void Awake()
     {
         icon = transform.Find("Icon").GetComponent<Image>();
         scoreValue = transform.Find("ScoreValue").GetComponent<TextMeshProUGUI>();
         button = transform.Find("Button").GetComponent<Button>();
+    }
+
+    internal void SetData(int score)
+    {
+        scoreValue.text = score.ToNumber();
     }
 }

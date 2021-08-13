@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+
 public class PlayerPrefsData<T>
 {
     public PlayerPrefsData(string _key)
@@ -46,61 +49,78 @@ public class RankingData : PlayerPrefsData<RankingData>
     {
         var savedData = LoadData();
         if (savedData != null)
+        {
             ranking = savedData.ranking;
+        }
     }
     public List<int> ranking = new List<int>();
-    public int myInt;
-    public int myString;
 }
 
 public class RankingUI : SingletonMonoBehavior<RankingUI>
 {
-    //테스트 로직
+    // 테스트 로직.
     public int tempScore = 100;
     [ContextMenu("점수 추가")]
-    void TestFn()
+    public void InsertScore()
     {
-        InsertScore();
-    }
-    public static void InsertScore()
-    {
-        Instance.ShowRanking(Instance.tempScore);
+        ShowRanking(tempScore);
     }
 
-    RankingData rankingData;
+    public RankingData rankingData;
+
     RankingUIItem baseItem;
-
     protected override void OnInit()
     {
-        rankingData = new RankingData("RankingData");
         baseItem = GetComponentInChildren<RankingUIItem>();
+        baseItem.gameObject.SetActive(false);
+        rankingData = new RankingData("NewRanking");
     }
 
-    int maxCount = 10;
-    public void ShowRanking(int currentScore)
+    public int maxCount = 10;
+    internal void ShowRanking(int currentScore)
     {
         base.Show();
 
-        // 랭킹을 보여주자
+        //랭킹을 보여주자.
 
-        // 10개 넘으면 삭제
-        // 미만이면 더하기만
-        if (rankingData.ranking.Count > maxCount)
+        // -> 10개 이상일때 마지막껄 빼고 
+        // 10개 미만이면 더하기만 하자.
+        InsertScore(currentScore);
+
+        ShowRankingUI();
+    }
+
+    private void ShowRankingUI()
+    {
+        baseItem.gameObject.SetActive(true);
+        foreach (var item in rankingData.ranking)
+        {
+            var newItem = Instantiate(baseItem, baseItem.transform.parent);
+            newItem.SetData(item);
+            ChildObject.Add(newItem.gameObject);
+        }
+        baseItem.gameObject.SetActive(false);
+    }
+
+    private void InsertScore(int currentScore)
+    {
+        if (rankingData.ranking.Count >= 10)
         {
             int minScore = rankingData.ranking[rankingData.ranking.Count - 1];
+
             if (minScore < currentScore)
             {
                 rankingData.ranking.Add(currentScore);
                 rankingData.ranking.Sort();
-                rankingData.ranking.Reverse();
+                rankingData.ranking.Reverse(); // 정렬된걸 뒤집는다.
                 rankingData.ranking.RemoveAt(rankingData.ranking.Count - 1);
+                rankingData.SaveData();
             }
         }
         else
         {
             rankingData.ranking.Add(currentScore);
+            rankingData.SaveData();
         }
-
-        rankingData.SaveData();
     }
 }
