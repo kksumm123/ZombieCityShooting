@@ -13,6 +13,7 @@ public class TitleScene : MonoBehaviour
         {
             // 비동기 로드
             var progress = SceneManager.LoadSceneAsync("Main");
+            loadingUI.ShowProgress(progress);
         }
     }
 }
