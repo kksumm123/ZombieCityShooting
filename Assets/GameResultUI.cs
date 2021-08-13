@@ -33,16 +33,20 @@ public class GameResultUI : SingletonMonoBehavior<GameResultUI>
 
     void OnClickReStart()
     {
+        Close();
         SceneManager.LoadScene("Stage1");
     }
 
     void OnClickHome()
     {
+        Close();
+        InstantiateHelper.IngSceneLoad = true;
         SceneManager.LoadScene("Title");
     }
 
     void OnClickRanking()
     {
+        Close();
         RankingUI.Instance.ShowRanking(Convert.ToInt32(yourScoreValue.text));
     }
 

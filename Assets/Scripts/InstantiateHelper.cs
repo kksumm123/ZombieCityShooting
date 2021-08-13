@@ -23,13 +23,17 @@ public class InstantiateHelper : MonoBehaviour
     }
     public EventType eventType = EventType.OnDestroy;
 
+    public static bool IngSceneLoad = false;
     private void OnDestroy()
     {
         if (eventType != EventType.OnDestroy)
             return;
 
         if (ApplicationQuit)
-            return; 
+            return;
+
+        if (IngSceneLoad)
+            return;
 
         InstantiateObjects();
     }

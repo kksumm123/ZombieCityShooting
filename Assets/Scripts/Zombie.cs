@@ -201,6 +201,11 @@ public class Zombie : Actor
     }
     [SerializeField] Material dieMaterial;
     [SerializeField] float dieMaterialDuration = 2;
+    void OnDestroy()
+    {
+        if (allZombies.Contains(this))
+            allZombies.Remove(this);
+    }
     void Die()
     {
         allZombies.Remove(this);
