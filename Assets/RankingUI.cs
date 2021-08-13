@@ -92,7 +92,7 @@ public class RankingUI : SingletonMonoBehavior<RankingUI>
             {
                 rankingData.ranking.Add(currentScore);
                 rankingData.ranking.Sort();
-                rankingData.ranking.RemoveAt(rankingData.ranking.Count - 1);
+                rankingData.ranking.RemoveAt(0);
             }
         }
         else
