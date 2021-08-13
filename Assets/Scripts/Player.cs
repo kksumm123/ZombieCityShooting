@@ -272,6 +272,9 @@ public partial class Player : Actor
         GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(diePreDelayTime);
         animator.SetTrigger("Die");
+
+        GameResultUI.Instance.ShowResult(StageManager.Instance.score
+                                       , StageManager.Instance.highScore);
     }
     #endregion TakeHit
 
