@@ -43,7 +43,7 @@ public class GameResultUI : SingletonMonoBehavior<GameResultUI>
 
     void OnClickRanking()
     {
-        RankingUI.Instance.ShowRanking();
+        RankingUI.Instance.ShowRanking(Convert.ToInt32(yourScoreValue.text));
     }
 
     public void ShowResult(int score, SaveInt highScore)
