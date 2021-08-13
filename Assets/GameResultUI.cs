@@ -27,6 +27,7 @@ public class GameResultUI : SingletonMonoBehavior<GameResultUI>
 
     public void ShowResult(int score, SaveInt highScore)
     {
+        base.Show();
         yourScoreValue.text = score.ToString();
         highScoreValue.text = highScore.ToString();
         star.sprite = GetStarSprite(score);

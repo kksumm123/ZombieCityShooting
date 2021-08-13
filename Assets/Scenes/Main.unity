@@ -4306,6 +4306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533319297}
+  - component: {fileID: 533319298}
   m_Layer: 5
   m_Name: GameResultUI
   m_TagString: Untagged
@@ -4341,6 +4342,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &533319298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533319296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714ec7749bef4934f941effdf0c91f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completeUiInite: 0
+  starScores:
+  - minScore: 100
+    sprite: {fileID: 21300000, guid: 35704fc3ecd0d3247829ff834a2e7197, type: 3}
+  - minScore: 500
+    sprite: {fileID: 21300000, guid: 4f1fb70d607d9234b9766e7b3953647b, type: 3}
+  - minScore: 1000
+    sprite: {fileID: 21300000, guid: b72c54c7abc666040930d6765c9329c2, type: 3}
+  - minScore: 1500
+    sprite: {fileID: 21300000, guid: 63020359866ca334793536fbb7227135, type: 3}
 --- !u!1 &538523347
 GameObject:
   m_ObjectHideFlags: 0
