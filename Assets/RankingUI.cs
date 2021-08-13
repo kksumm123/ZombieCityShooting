@@ -85,18 +85,21 @@ public class RankingUI : SingletonMonoBehavior<RankingUI>
 
         // 10개 넘으면 삭제
         // 미만이면 더하기만
-        
-        int minScore = 0;
-
-        if (rankingData.ranking.Count > 0)
-            minScore = rankingData.ranking[rankingData.ranking.Count - 1];
-        if (minScore < currentScore)
+        if (rankingData.ranking.Count > maxCount)
+        {
+            int minScore = rankingData.ranking[rankingData.ranking.Count - 1];
+            if (minScore < currentScore)
+            {
+                rankingData.ranking.Add(currentScore);
+                rankingData.ranking.Sort();
+                rankingData.ranking.RemoveAt(rankingData.ranking.Count - 1);
+            }
+        }
+        else
         {
             rankingData.ranking.Add(currentScore);
-            rankingData.ranking.Sort();
-            if (rankingData.ranking.Count > maxCount)
-                rankingData.ranking.RemoveRange(maxCount, rankingData.ranking.Count - maxCount);
-            rankingData.SaveData();
         }
+
+        rankingData.SaveData();
     }
 }
