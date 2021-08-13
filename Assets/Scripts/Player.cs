@@ -261,7 +261,7 @@ public partial class Player : Actor
             animator.SetTrigger("TakeHit");
 
             if (hp <= 0)
-                DieCo();
+                StartCoroutine(DieCo());
         }
     }
 
