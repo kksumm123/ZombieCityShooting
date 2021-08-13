@@ -26,9 +26,9 @@ public class GameResultUI : SingletonMonoBehavior<GameResultUI>
         highScoreValue = transform.Find("HighScore/Value").GetComponent<TextMeshProUGUI>();
         
 
-        transform.Find("GameResultUI/MeneButotn/Restart").GetComponent<Button>().AddListener(this, OnClickReStart);
-        transform.Find("GameResultUI/MeneButotn/Home").GetComponent<Button>().AddListener(this, OnClickHome);
-        transform.Find("GameResultUI/MeneButotn/Ranking").GetComponent<Button>().AddListener(this, OnClickRanking);
+        transform.Find("MeneButotn/Restart").GetComponent<Button>().AddListener(this, OnClickReStart);
+        transform.Find("MeneButotn/Home").GetComponent<Button>().AddListener(this, OnClickHome);
+        transform.Find("MeneButotn/Ranking").GetComponent<Button>().AddListener(this, OnClickRanking);
     }
 
     void OnClickReStart()

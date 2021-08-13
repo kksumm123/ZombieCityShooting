@@ -2,15 +2,51 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public class PlayerPrefsData<T>
+{
+    public PlayerPrefsData(string _key)
+    {
+        key = _key;
+    }
 
+    string key;
+    public T LoadData()
+    {
+        T record = JsonUtility.FromJson<T>(PlayerPrefs.GetString(key));
+        if (record == null)
+        {
+            Debug.LogWarning("record == null");
+            return default(T);
+        }
+
+        Debug.LogWarning("Load Complete");
+        return record;
+    }
+
+    public void SaveData()
+    {
+        string json = JsonUtility.ToJson(this);
+
+        try
+        {
+            PlayerPrefs.SetString(key, json);
+            Debug.Log("json:" + json);
+        }
+        catch (System.Exception err)
+        {
+            Debug.Log("Got: " + err);
+        }
+    }
+}
 
 [System.Serializable]
 public class RankingData : PlayerPrefsData<RankingData>
 {
     public RankingData(string key) : base(key)
     {
-        var saveData = LoadData();
-        ranking = saveData.ranking;
+        var savedData = LoadData();
+        if (savedData != null)
+            ranking = savedData.ranking;
     }
     public List<int> ranking = new List<int>();
     public int myInt;
@@ -46,6 +82,10 @@ public class RankingUI : SingletonMonoBehavior<RankingUI>
         base.Show();
 
         // 랭킹을 보여주자
+
+        // 10개 넘으면 삭제
+        // 미만이면 더하기만
+        
         int minScore = 0;
 
         if (rankingData.ranking.Count > 0)
