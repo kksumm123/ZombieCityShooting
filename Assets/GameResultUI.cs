@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameResultUI : SingletonMonoBehavior<GameResultUI>
@@ -23,6 +24,26 @@ public class GameResultUI : SingletonMonoBehavior<GameResultUI>
         star = transform.Find("Star").GetComponent<Image>();
         yourScoreValue = transform.Find("YourScore/Value").GetComponent<TextMeshProUGUI>();
         highScoreValue = transform.Find("HighScore/Value").GetComponent<TextMeshProUGUI>();
+        
+
+        transform.Find("GameResultUI/MeneButotn/Restart").GetComponent<Button>().AddListener(this, OnClickReStart);
+        transform.Find("GameResultUI/MeneButotn/Home").GetComponent<Button>().AddListener(this, OnClickHome);
+        transform.Find("GameResultUI/MeneButotn/Ranking").GetComponent<Button>().AddListener(this, OnClickRanking);
+    }
+
+    void OnClickReStart()
+    {
+        SceneManager.LoadScene("Stage1");
+    }
+
+    void OnClickHome()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    void OnClickRanking()
+    {
+        print("구현해야함");
     }
 
     public void ShowResult(int score, SaveInt highScore)
