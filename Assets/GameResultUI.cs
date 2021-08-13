@@ -43,7 +43,7 @@ public class GameResultUI : SingletonMonoBehavior<GameResultUI>
 
     void OnClickRanking()
     {
-        print("구현해야함");
+        RankingUI.Instance.ShowRanking();
     }
 
     public void ShowResult(int score, SaveInt highScore)
