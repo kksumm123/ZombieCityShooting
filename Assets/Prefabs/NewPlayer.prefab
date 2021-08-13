@@ -1998,7 +1998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb745de572e2b54d88b5beddcc4ffce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 99999
+  hp: 300
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   mainWeapon: {fileID: 7119531273919437861, guid: 530a5f706e2fc1d4dace9c91ace57375, type: 3}
   subWeapon: {fileID: 5587687938452155612, guid: c99a721fa067cdf418e79f3589636395, type: 3}
